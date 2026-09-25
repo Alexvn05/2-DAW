@@ -1,0 +1,82 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div>div
+{
+    border: 1px solid black;
+    display: flex;
+    gap: 5px;
+}
+
+/* CABECERA */
+.principal
+{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo
+{
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.nav
+{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* BODY */
+.cuerpo
+{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.aside
+{
+    width: 150px;
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body
+{
+    flex: 1;
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FOOTER */
+.footer
+{
+    border: 1px solid black;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

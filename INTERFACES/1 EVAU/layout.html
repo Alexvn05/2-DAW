@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Layout con Divs</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header header header"
+      "aside-left body aside-right"
+      "footer footer footer";
+    gap: 5px;   
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid #333;
+  }
+
+  .box {
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .header {
+    display: grid;
+  }
+
+  .logo {
+    border-right: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .aside-left {
+    grid-area: aside-left;
+    min-height: 260px;
+  }
+
+  .body {
+    grid-area: body;
+    min-height: 260px;
+  }
+
+  .aside-right {
+    grid-area: aside-right;
+    min-height: 260px;
+  }
+
+  .footer {
+    grid-area: footer;
+    min-height: 60px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="layout">
+    <div class="header box">
+      <div class="logo">LOGO</div>
+      <div class="nav">NAV</div>
+    </div>
+
+    <div class="aside-left box">ASIDE</div>
+    <div class="body box">BODY</div>
+    <div class="aside-right box">ASIDE</div>
+
+    <div class="footer box">FOOTER</div>
+  </div>
+
+</body>
+</html>
