@@ -45,8 +45,8 @@
         }
         else
         {
-            $biblioteca["Poesía  "][0]["ejemplares"] = ["Central" => 0];
-            echo $biblioteca["Poesia"][0]["ejemplares"]["Central"];
+            $biblioteca["Poesía"][0]["ejemplares"] = ["Central" => 0];
+            echo $biblioteca["Poesía"][0]["ejemplares"]["Central"];
 
         }
     ?>
@@ -80,6 +80,45 @@
     ?>
     <h2>10</h2>
     <?php
+        foreach ($biblioteca as $categoria => $libro) 
+        {
+            foreach ($libro as $info) 
+            {
+                if (isset($info["ejemplares"]) && array_sum($info["ejemplares"]) > 0)
+                {
+                    $total = array_sum($info["ejemplares"]);
+                    echo $info["titulo"].": ".$total." ejemplares en total<br>";
+                }
+            }
+        }
+    ?>
+    <h2>11</h2>
+    <?php
+        foreach ($biblioteca as $categoria => $libro) 
+        {
+            foreach ($libro as $info) 
+            {
+                foreach ($info["ejemplares"] as $zona => $cantidad) 
+                {
+                    if (isset($info["ejemplares"]) && $zona == 0)
+                    {
+                        echo $info["titulo"]." no tiene ejemplares en ".$zona."<br>";
+                    }
+                }
+            }
+        }
+    ?>
+    <h2>12</h2>
+    <?php
+        
+    ?>
+    <h2>13</h2>
+    <?php
+        
+    ?>
+    <h2>14</h2>
+    <?php
+        
     ?>
 </body>
 </html>
