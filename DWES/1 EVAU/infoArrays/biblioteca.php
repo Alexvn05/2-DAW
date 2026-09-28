@@ -98,27 +98,89 @@
         {
             foreach ($libro as $info) 
             {
-                foreach ($info["ejemplares"] as $zona => $cantidad) 
+                if (isset($info["ejemplares"]))
                 {
-                    if (isset($info["ejemplares"]) && $zona == 0)
+                    foreach ($info["ejemplares"] as $zona => $cantidad) 
                     {
-                        echo $info["titulo"]." no tiene ejemplares en ".$zona."<br>";
+                        if ($cantidad == 0)
+                        {
+                            echo $info["titulo"]." no tiene ejemplares en ".$zona."<br>";
+                        }
                     }
+                
                 }
             }
         }
     ?>
     <h2>12</h2>
     <?php
-        
+        foreach ($biblioteca as $categoria => $libro) 
+        {
+            foreach ($libro as $info) 
+            {
+                if (isset($info["resenas"]))
+                {
+                    $cont = 0;
+                    $suma = 0;
+                    foreach ($info["resenas"] as $reseña) 
+                    {
+                        $suma += $reseña["nota"];
+                        $cont++;
+                    }
+                    $media = $suma / $cont;
+                    echo $categoria." - nota media: ".round($media, 1)."<br>";
+                }
+            }
+        }
     ?>
     <h2>13</h2>
     <?php
-        
+        $contTotal = 0;
+        $maxLibro = 0;
+        $tituloLibro = "";
+        foreach ($biblioteca as $categoria => $libros) 
+        {
+            foreach ($libros as $libro) 
+            {
+
+                if (isset($libro["resenas"]))
+                {
+
+                    $contLibro = 0;
+                    foreach ($libro["resenas"] as $reseña) 
+                    {
+                        if ($reseña["nota"] >= 4)
+                        {
+                            $contLibro++;
+                            $contTotal++;
+                        }
+                    }
+
+                    if ($contLibro > $maxLibro)
+                    {
+                        $maxLibro = $contLibro;
+                        $tituloLibro = $libro["titulo"];
+                    }
+                }
+            }
+        }
+        echo "Hay ".$contTotal." reseñas con nota 4 o superior<br>";
+        echo "El libro con mas reseñas es ".$tituloLibro." con ".$maxLibro." reseñas";
     ?>
     <h2>14</h2>
     <?php
-        
+        foreach ($biblioteca as $categoria => $libros) 
+        {
+            $cont = 0;
+            foreach ($libros as $libro) 
+            {
+                $cont++;
+            }
+            $array[] = [$categoria => $cont];
+        }
+        arsort($array);
+        var_dump($array);
+
     ?>
 </body>
-</html>
+</html> 
