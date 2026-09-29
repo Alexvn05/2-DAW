@@ -150,15 +150,15 @@
         // 6. "Acceso permitido" si es mayor de edad O tiene autorización; si no, "Acceso denegado"
             // let edad = 16;
             // let tieneAutorizacion = true;
-            // let resultado = edad >= 18 ? ""
+            // let resultado = edad >= 18 || tieneAutorizacion ? "Acceso permitido" : "Acceso denegado";
 
         // 7. "Compra posible" si hay saldo suficiente Y la cuenta NO está bloqueada; si no, "Compra no posible"
             // let saldo = 60;
             // let precio = 50;
             // let cuentaBloqueada = false;
-            // let resultado = 
+            // let resultado = !cuentabloqueada && saldo >= precio ? "Compra posible" : "Compra imposible";
 
         // 8. "Superado" si AMBAS notas son >= 5; si no, "Pendiente"
             // let examen = 6;
             // let practicas = 4;
-            // let resultado =
+            // let resultado = examen >=5 && practicas >= 5 ? "Superado" : "Pendiente";
