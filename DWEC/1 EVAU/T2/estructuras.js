@@ -86,3 +86,23 @@ for (let i = 1; i <= 10; i++)
     if (i % 3 == 0) continue;
     console.log(i);
 }
+
+// Almacen dispone de 3 zonas y contiene 5 estanterias
+// Etiqueta el bucle exterior con el nombre de almacen
+// Cuando se llegue a la zona 2 estanteria 4 debe finalizarse los 2 bucles
+// Antes de finalizar muestra producto localizado
+salir:
+for (i = 1; i <= 3; i++)
+{
+    for (j = 1; j <= 5; j++)
+    {
+        if (i == 2 && j == 4) 
+        {
+            console.log("Producto localizado");
+            break salir;
+        }
+        console.log("Zona: "+i+" - Estanteria: "+j);
+        
+    } 
+
+} 
