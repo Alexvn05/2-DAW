@@ -46,7 +46,7 @@
     ?>
     <h1>3- Variables en columnas y filas</h1>
     <?php
-        $columna = 4;
+        $columna = 7;
         $fila = 5;
         
         for ($i = 0; $i < $fila; $i++)
@@ -91,16 +91,12 @@
                 for ($i = 0; $i < 10; $i++)
                 {
                     echo "<tr>";
-                    echo '<td class="columna">';
-                    echo $i;
-                    echo "</td>";
+                        echo '<td class="columna">'.$i."</td>";
 
-                    for ($j = 0; $j < 10; $j++)
-                    {
-                        echo "<td>";
-                        echo $j * $i;
-                        echo "</td>";
-                    }
+                        for ($j = 0; $j < 10; $j++)
+                        {
+                            echo "<td>".$j * $i."</td>";
+                        }
                     echo "</tr>";
 
                 }
@@ -144,6 +140,7 @@
                 <th>Matematicas</th>
                 <th>Historia</th>
                 <th>Programacion</th>
+                <th>Promedio</th>
             </tr>
         </thead>
         <tbody>
