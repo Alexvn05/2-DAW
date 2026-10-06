@@ -14,3 +14,7 @@ console.log(multiArray[1].length);
 
 const arr2 = [2, 3, 4, 5];
 console.log(arr2[3]);
+
+console.log("Añadimos elemento con el metodo push");
+arr2.push(10);
+console.log(arr2);
