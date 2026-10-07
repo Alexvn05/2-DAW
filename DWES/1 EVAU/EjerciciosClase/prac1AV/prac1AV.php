@@ -75,10 +75,65 @@
         $temperatura = [];
         $ciudades = ["Madrid", "Sevilla", "Barcelona", "Paris", "Roma", "Berlin"];
 
-        $tempMedia = [];
-        $suma = 0;
-        $total = 0;
+        // CREO EL ARRAY
+        for ($i = 0; $i < count($ciudades); $i++) // FILAS CIUDADES
+        {   
+                for ($j = 0; $j < 6; $j++) // COLUMNAS DIAS
+                {
+                    $random = random_int(-10, 45);
+            
+                    $temperatura["Dia ".($j+1)][$ciudades[$i]] = $random;
+                }
+        }   
+        var_dump($temperatura);
 
+        // • La temperatura más baja y más alta
+        $tBaja = $temperatura["Dia 1"]["Madrid"];
+        $tAlta = $temperatura["Dia 1"]["Madrid"];
+        
+        // • El día con mayor variación térmica
+        $varTer = $temperatura["Dia 1"]; 
+        $varterDia;
+        $varTermica = [];
+
+        // • La temperatura media por ciudad
+        $tempMediaCiudad = [];
+        
+        foreach ($temperatura as $dia => $ciudades)
+        {
+            foreach ($ciudades as $ciudad => $temp) 
+            {
+                if ($temp > $tAlta)
+                {
+                    $tAlta = $temp;
+                }
+                else if ($temp < $tBaja)
+                {
+                    $tBaja = $temp;
+                }
+                $tempMediaCiudad[$ciudad] += number_format($temp / 6, 2); 
+                $varTermica[$dia] +=  number_format($temp / count($ciudades), 2);
+                
+            }
+            
+        }
+
+        foreach ($varTermica as $dia => $var)
+        {
+            if ($varT)
+        }
+        var_dump($varTermica);
+
+        echo "La temperatura mas alta es: ".$tAlta;
+        echo "<br>La temperatura mas baja es: ".$tBaja;
+        echo "<br>El dia con mayor variacion termica es ".$varTer;
+
+
+        // $temperatura["Media"][$ciudad] = 
+
+        
+        
+        /*
         echo '<table border = "1"';
         echo "<tr><th>Ciudades</th>";
             for ($i = 1; $i<7; $i++)
@@ -91,13 +146,30 @@
         {   
             $suma = 0;
             $total = 0;
+            $tmin = 100;
+            $tmax = -100;
+
             echo "<tr>";
                 echo "<td>".$ciudades[$i]."</td>";
                 for ($j = 0; $j < 6; $j++)
                 {
                     $random = random_int(-10, 45);
+            
                     $temperatura["Dia ".($j+1)][$ciudades[$i]] = $random;
-                    echo "<td>".$random."</td>";
+                    if ($random < 0)
+                    {
+                        echo '<td class="t-azul">'.$random.'</td>';
+                    } 
+                    else if ($random > 35)
+                    {
+                        echo '<td class="t-rojo">'.$random.'</td>';
+
+                    }
+                    else
+                    {
+                        echo '<td>'.$random.'</td>';
+                    }
+
                     $suma += $random;
                 }
             $total = $suma / 6;
@@ -149,7 +221,7 @@
                 echo "<li>".$ciudad.": ".number_format($temp, 2)."</li>";
             }
         echo "</ul></p>";
-    ?>
+    */?>
     
 </body>
 </html>

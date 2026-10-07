@@ -18,3 +18,4 @@ console.log(arr2[3]);
 console.log("Añadimos elemento con el metodo push");
 arr2.push(10);
 console.log(arr2);
+
