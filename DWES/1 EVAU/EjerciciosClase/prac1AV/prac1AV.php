@@ -1,10 +1,14 @@
+<?php
+    include "functions/functionsAV.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="prac1AV.css">
+    <link rel="stylesheet" href="styles/styleAV.css">
 </head>
 <body>
     <h2>1- Bucles anidados</h2>
@@ -106,8 +110,8 @@
 
         foreach ($temperatura as $dia => $ciudad)
         {
-            $tMinDia = 0;
-            $tMaxDia = 0;
+            $tMinDia = $ciudad[$nombre];
+            $tMaxDia = $ciudad[$nombre];
 
             foreach ($ciudad as $nombre => $temp)
             {
@@ -178,6 +182,7 @@
     ?>
     <h3>Tabla</h3>
     <div class="div-temperatura">
+    <p class="p-Tabla">Temperaturas de ciudades por día (°C)</p>
     <?php
         // CREO UN ARRAY PARA VER LA CIUDAD CON LA MEDIA MAS ALTA
         $tMediaAlta = $temperatura["Media"]["Madrid"];
@@ -191,8 +196,7 @@
             }
         }
 
-        echo '<table border = "1">';
-            echo "<caption>Temperaturas de ciudades por día (°C)</caption>";
+        echo '<div class="div-table"><table>';
             echo "<tr><th>Ciudades/Dia</th>";
                 foreach ($temperatura as $dia => $ciudad)
                 {
@@ -212,13 +216,13 @@
                     {
                         $temp = $valor[$ciudad];
                         echo '<td class="';
-                        if ($temp > 35) {echo 't-rojo ';}
-                        else if ($temp < 0) {echo 't-blue ';}
-                        if ($dia == "Dia 6") {echo 't-verde ';}
-                        if ($tBaja == $temp) {echo 't-baja ';}
-                        if ($tAlta == $temp) {echo 't-alta ';}
-                        if ($nombreCiu == $ciudad) {echo 't-mediaAlta ';}
-
+                            if ($temp > 35) {echo 't-rojo ';}
+                            else if ($temp < 0) {echo 't-azul ';}
+                            if ($dia == "Dia 6") {echo 't-verde ';}
+                            if ($tBaja == $temp) {echo 't-baja ';}
+                            if ($tAlta == $temp) {echo 't-alta ';}
+                            if ($nombreCiu == $ciudad) {echo 't-mediaAlta ';}
+                            if ($dia == "Media") {echo 't-media';}
                         echo '">'.$temp."</td>";
                             /*
                         if ($temp > 35)
@@ -247,7 +251,7 @@
                     }
                 echo "</tr>";
             }
-        echo "</table>";
+        echo "</table></div>";
     ?>
     <br>
         <div class="div-stats">
@@ -264,12 +268,26 @@
             </p>
             <p><span>Dia con mayor variacion: </span>
                 <?=
-                    $diaVarMax.", ".$ciuVarMax. " (".$varMax."ºC de diferencia)";
+                    $diaVarMax. " (".$varMax."ºC de diferencia)";
                 ?>
             </p>
         </div>
     
     </div>
+
+    <h2>3- Funciones</h2>
+    <?php
+        $num = [1,1,3, 5, 7, 9, 9, 9, 4, 8, 2];
+        var_dump($num);
+        var_dump(filterByType($num, "prime"));
+
+        sort($num);
+        var_dump($num);
+        var_dump(calculateStatistic($num));
+
+        $texto = "Hola me, llamo Alejandro";
+        var_dump(analyzeWords($texto));
+    ?>
 
 
     <?php
