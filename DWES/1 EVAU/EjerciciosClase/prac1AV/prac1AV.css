@@ -1,3 +1,26 @@
+/*TABLA*/
+caption
+{
+    font-size: 30px;
+    background-color: rgb(5, 4, 4);
+    color: white;
+}
+
+th, td
+{
+    padding: 20px;
+}
+
+th
+{
+    background-color: rgb(201, 198, 198);
+}
+
+.t-verde
+{
+    background-color: greenyellow;
+}
+
 .t-rojo
 {
     color: red;
@@ -7,3 +30,65 @@
 {
     color: blue;
 }
+
+.t-baja
+{
+    font-weight: bold;         /* Pone el texto en negrita */
+    text-decoration: underline;
+}
+
+.t-alta
+{
+    font-size: italic;
+    color: brown;
+}
+
+.td-ciudad
+{
+    background-color: rgb(122, 224, 255);
+}
+
+.t-mediaAlta
+{
+    background-color: rgb(255, 255, 107);
+}
+
+
+/*DIVS*/
+.div-temperatura
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin-left: 30%;
+    margin-right: 30%;
+    flex-direction: column;
+}
+
+.div-stats
+{
+    border: 1px solid black;
+    align-items: left;
+    justify-content: left;
+    background-color: rgb(231, 231, 231);
+    padding: 0px 10%;
+}
+
+.p-stats
+{
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p>span
+{
+    font-weight: bold;
+}
+
+
+
+
+
+
