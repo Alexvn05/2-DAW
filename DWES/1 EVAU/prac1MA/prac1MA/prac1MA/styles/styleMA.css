@@ -1,0 +1,190 @@
+body
+{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f3f5fa;
+    color: #1f2937;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+}
+
+h2
+{
+    margin-top: 48px;
+    padding-left: 12px;
+    border-left: 6px solid #0f766e;
+    color: #134e4a;
+}
+
+h3
+{
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #475569;
+}
+
+.tarjeta
+{
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+    margin-bottom: 20px;
+}
+
+.figuras
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.figuras .tarjeta
+{
+    flex: 1;
+    min-width: 200px;
+}
+
+.figura
+{
+    margin: 0;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #0f766e;
+}
+
+.tabla-datos,
+.tabla-resumen
+{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+    margin-bottom: 24px;
+}
+
+.tabla-datos th,
+.tabla-datos td,
+.tabla-resumen th,
+.tabla-resumen td
+{
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-datos th
+{
+    background-color: #134e4a;
+    color: white;
+    text-align: center;
+}
+
+.tabla-datos td
+{
+    text-align: center;
+}
+
+.tabla-resumen th
+{
+    background-color: #e2e8f0;
+    text-align: left;
+}
+
+.tabla-resumen td
+{
+    text-align: left;
+}
+
+.nombre-ciudad
+{
+    background-color: #e0f2fe;
+    font-weight: bold;
+}
+
+.col-media
+{
+    background-color: #f1f5f9;
+    border-left: 3px solid #134e4a;
+}
+
+.dia--finde
+{
+    background-color: #d9f99d;
+}
+
+.ciudad--calida
+{
+    background-color: #fef9a8;
+}
+
+.temp--frio
+{
+    color: #1d4ed8;
+}
+
+.temp--calor
+{
+    color: #dc2626;
+}
+
+.temp--min
+{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.temp--max
+{
+    font-style: italic;
+    color: #8b4513;
+}
+
+.lista-resultados
+{
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.lista-resultados strong
+{
+    color: #0f766e;
+}
+
+.stock--alto
+{
+    background-color: #bbf7d0;
+    color: #166534;
+    font-weight: bold;
+}
+
+.stock--medio
+{
+    background-color: #fde68a;
+    color: #92400e;
+    font-weight: bold;
+}
+
+.stock--agotado
+{
+    background-color: #fecaca;
+    color: #991b1b;
+    font-weight: bold;
+}
+
+.precio-antiguo
+{
+    color: #94a3b8;
+}
+
+.etiqueta-descuento
+{
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background-color: #0f766e;
+    color: white;
+    font-size: 13px;
+}

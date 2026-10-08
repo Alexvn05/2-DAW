@@ -273,7 +273,7 @@
         $num = [1,1,3, 5, 7, 9, 9, 9, 4, 8, 2];
         echo "<pre>";
         var_dump($num);
-        var_dump(filterByType($num, "prime"));
+        var_dump(filterByType($num, "prime")); // OPCIONES: "even"
         echo "</pre>";
 
 
