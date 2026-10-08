@@ -1,5 +1,6 @@
 <?php
     include "functions/functionsAV.php";
+    include "functions/shopAV.php";
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +90,9 @@
                     $temperatura["Dia ".($j+1)][$ciudades[$i]] = $random;
                 }
         }
+        echo "<pre>";
         var_dump($temperatura);
+        echo "</pre>";
 
         // • La temperatura más baja y más alta
         // GUARDO EL NOMBRE Y EL DIA PARA UN FUTURO
@@ -107,14 +110,27 @@
 
         // • La temperatura media por ciudad
         $tempMediaCiudad = [];
+        foreach ($ciudades as $c)
+        {
+            $tempMediaCiudad[$c] = 0;
+        }
 
         foreach ($temperatura as $dia => $ciudad)
         {
-            $tMinDia = $ciudad[$nombre];
-            $tMaxDia = $ciudad[$nombre];
+            $primero = true;
+
+            // $tMinDia = $ciudad[$nombre]; 
+            // $tMaxDia = $ciudad[$nombre];
 
             foreach ($ciudad as $nombre => $temp)
             {
+                if ($primero)
+                {
+                    $tMaxDia = $temp;
+                    $tMinDia = $temp;
+                    $primero = false;
+                }
+
                 if ($temp > $tAlta)
                 {
                     $tAlta = $temp;
@@ -138,31 +154,32 @@
                     $tMinDia = $temp;
                 }
             }
-            $varTermica[$dia][$nombre] = $tMaxDia - $tMinDia;
+            $varTermica[$dia] = $tMaxDia - $tMinDia;
 
         }
+        echo "<pre>";
         var_dump($varTermica);
         var_dump($tempMediaCiudad);
+        echo "</pre>";
+        
 
 
         // GUARDO LA CIUDAD PARA UN FUTURO
 
-        $varMax = $varTermica["Dia 1"]["Madrid"]; // MAXIMA DIFERENCIA ENTRE TEMPERATURA
+        $varMax = $varTermica["Dia 1"]; // MAXIMA DIFERENCIA ENTRE TEMPERATURA
         $diaVarMax = "Dia 1"; 
         $ciuVarMax = "Madrid";
 
 
-        foreach ($varTermica as $dia => $ciudad)
+        foreach ($varTermica as $dia => $var)
         {
-            foreach ($ciudad as $nombre => $var)
+            if ($var > $varMax)
             {
-                if ($var > $varMax)
-                {
-                    $varMax = $var;
-                    $diaVarMax = $dia;
-                    $ciuVarMax = $nombre;
-                }
+                $varMax = $var;
+                $diaVarMax = $dia;
+                $ciuVarMax = $nombre;
             }
+            
         }
 
         echo "La temperatura mas alta es: ".$tAlta;
@@ -224,30 +241,6 @@
                             if ($nombreCiu == $ciudad) {echo 't-mediaAlta ';}
                             if ($dia == "Media") {echo 't-media';}
                         echo '">'.$temp."</td>";
-                            /*
-                        if ($temp > 35)
-                        {
-                            
-                        }
-                        else if ($temp < 0)
-                        {
-                            echo '<td class="t-azul">';
-                                echo $temp;
-                            echo "</td>";
-                        }
-                        else if ($dia == "Dia 6")
-                        {
-                            echo '<td class="t-verde">';
-                                echo $temp;
-                            echo "</td>";
-                        }
-                        else
-                        {
-                            echo '<td>';
-                                echo $temp;
-                            echo "</td>";
-                        }*/
-
                     }
                 echo "</tr>";
             }
@@ -278,108 +271,96 @@
     <h2>3- Funciones</h2>
     <?php
         $num = [1,1,3, 5, 7, 9, 9, 9, 4, 8, 2];
+        echo "<pre>";
         var_dump($num);
         var_dump(filterByType($num, "prime"));
+        echo "</pre>";
+
 
         sort($num);
+        echo "<pre>";
         var_dump($num);
         var_dump(calculateStatistic($num));
+        echo "</pre>";
+        
 
         $texto = "Hola me, llamo Alejandro";
+        echo "<pre>";
         var_dump(analyzeWords($texto));
+        var_dump(convertTemperature(100));
+        echo "</pre>";
+        
     ?>
 
-
+    <h2>4- ARRAYS ASOCIATIVOS </h2>
     <?php
-        /*
-        echo '<table border = "1"';
-        echo "<tr><th>Ciudades</th>";
-            for ($i = 1; $i<7; $i++)
-            {
-                echo "<th>Dia ".$i."</th>";
-            }
-        echo "</tr>";
-
-        for ($i = 0; $i < count($ciudades); $i++)
-        {
-            $suma = 0;
-            $total = 0;
-            $tmin = 100;
-            $tmax = -100;
-
+    // PRIMERA TABLA
+        echo "<table>";
             echo "<tr>";
-                echo "<td>".$ciudades[$i]."</td>";
-                for ($j = 0; $j < 6; $j++)
-                {
-                    $random = random_int(-10, 45);
-
-                    $temperatura["Dia ".($j+1)][$ciudades[$i]] = $random;
-                    if ($random < 0)
-                    {
-                        echo '<td class="t-azul">'.$random.'</td>';
-                    }
-                    else if ($random > 35)
-                    {
-                        echo '<td class="t-rojo">'.$random.'</td>';
-
-                    }
-                    else
-                    {
-                        echo '<td>'.$random.'</td>';
-                    }
-
-                    $suma += $random;
-                }
-            $total = $suma / 6;
-            $tempMedia[$ciudades[$i]] = $total;
+                echo "<th>Nombre</th>";
+                echo "<th>Precio con IVA</th>";
+                echo "<th>Stock</th>";
             echo "</tr>";
-        }
-
+            foreach ($productos as $producto)
+            {
+                echo "<tr>";
+                    echo "<td>".ucfirst($producto["nombre"])."</td>";
+                    echo "<td>".formatPrice(calculateIVA($producto["precio"]))."</td>";
+                    echo '<td class="';
+                        if ($producto["stock"] > 10) {echo 'stock-verde';}
+                        else if ($producto["stock"] > 0) {echo 'stock-amarillo';}
+                        else if ($producto["stock"] == 0) {echo 'stock-rojo';}
+                    echo '">'.$producto["stock"]."</td>";
+                echo "</tr>";
+            }
         echo "</table>";
-        var_dump($temperatura);
+                
     ?>
     <?php
-        $min = 50;
-        $max = -50;
-
-        $var;
-        $varActual;
-        $varMax = 0;
-
-
-
-        foreach ($temperatura as $dia => $ciudad)
+    // SEGUNDA TABLA
+        $productosConDescuento = $productos;
+        foreach ($productosConDescuento as $key => $value) 
         {
-            foreach ($ciudad as $temp)
+            if ($value["precio"] > 100)
             {
-                $tem = $temp;
-                if ($tem < $min)
-                {
-                    $min = $tem;
-                }
-                else if ($tem > $max)
-                {
-                    $max = $tem;
-                }
-            }
-            $varActual = $min - $max;
-            if ($varActual < $varMax)
-            {
-                $varMax = $varActual;
-                $var = $dia;
+                $productosConDescuento[$key]["descuento"] = 10;
+                
             }
         }
+        echo "<pre>";
+        var_dump($productosConDescuento);
+        echo "</pre>";
 
-        echo "<p>La temperatura mas baja es: ".$min."</p>";
-        echo "<p>La temperatura mas alta es: ".$max."</p>";
-        echo "<p>El dia con mas variacion termica es: ".$dia."</p>";
-        echo "<p>La temperatura media por ciudad es: <ul>";
-            foreach ($tempMedia as $ciudad => $temp)
+        echo "<table>";
+            echo "<tr>";
+                echo "<th>Nombre</th>";
+                echo "<th>Precio con IVA</th>";
+                echo "<th>Stock</th>";
+            echo "</tr>";
+            foreach ($productosConDescuento as $producto)
             {
-                echo "<li>".$ciudad.": ".number_format($temp, 2)."</li>";
+                echo "<tr>";
+                    echo "<td>".ucfirst($producto["nombre"])."</td>";
+                    echo "<td>";
+                        if (isset($producto["descuento"]))
+                        {   
+                            echo "<s>".formatPrice(calculateIVA($producto["precio"]))."</s> - ";
+                            echo formatPrice(calculateIVA($producto["precio"])*((100 - $producto["descuento"])/100));
+                        }
+                        else
+                        {
+                            echo formatPrice(calculateIVA($producto["precio"]));
+                        }
+                        echo "</td>";
+                    echo '<td class="';
+                        if ($producto["stock"] > 10) {echo 'stock-verde';}
+                        else if ($producto["stock"] > 0) {echo 'stock-amarillo';}
+                        else if ($producto["stock"] == 0) {echo 'stock-rojo';}
+                    echo '">'.$producto["stock"]."</td>";
+                echo "</tr>";
             }
-        echo "</ul></p>";
-    */?>
-
+        echo "</table>";
+                
+    ?>
 </body>
 </html>

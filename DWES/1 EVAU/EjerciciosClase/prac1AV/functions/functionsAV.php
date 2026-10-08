@@ -49,14 +49,19 @@
 
     function calculateStatistic($array)
     {
+        $array_moda = [];
         foreach ($array as $n)
         {
-            $i = 1;   
-            $array_moda[$n] += $i;
+            if (!isset($array_moda[$n]))
+            {
+                $array_moda[$n] = 0;
+            }  
+            $array_moda[$n]++;;
             
         }
         $nMax = 0;
         $moda = 0;
+    
         foreach ($array_moda as $n => $total)
         {
             if ($nMax < $total)
@@ -118,9 +123,8 @@
             }
             
         }
-
         $resul = [
-            "Numero de palabras" => strlen($string),
+            "Numero de palabras" => count($palabras),
             "Palabra mas larga" => $nomPLarga,
             "Palabra mas corta" => $nomPCorta
         ];
@@ -139,16 +143,32 @@
                 {
                     $temperatura = ($temp * 9 / 5) + 32;
                 }
-                else
+                else if ($des == "Kelvin")
                 {
-
+                    $temperatura = 	$temp + 273.15;
                 }
                 break;
             
             case "Fahrenheit":
+                if ($des == "Celsius")
+                {
+                    $temperatura = ($temp - 32) * 5 / 9 ;
+                }
+                else if ($des == "Kelvin")
+                {
+                    $temperatura = ($temp - 32) * 5 / 9 + 273.15 ;
+                }
                 break;
-            
+                
             case "Kelvin":
+                if ($des == "Celsius")
+                {
+                    $temperatura = $temp - 273.15;
+                }
+                else if ($des == "Fahrenheit")
+                {
+                    $temperatura = ($temp - 273.15) * 9 / 5 + 32;
+                }
                 break;
 
             default:

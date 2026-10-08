@@ -43,7 +43,7 @@ th
 
 .t-alta
 {
-    font-size: italic;
+    font-style: italic;
     color: brown;
 }
 
@@ -103,8 +103,26 @@ p>span
     font-weight: bold;
 }
 
+/*FUNCIONES*/
+.stock-verde
+{
+    color: greenyellow;
+}
 
+.stock-amarillo
+{
+    color: yellow;
+}
 
+.stock-rojo
+{
+    color: red;
+}
+
+h3
+{
+    text-align: center;
+}
 
 
 
