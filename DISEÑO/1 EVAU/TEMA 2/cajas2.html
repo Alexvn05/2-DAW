@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+        .caja1
+        {
+            background-color: rgb(206, 206, 206);
+            float: left;
+            width: 49.9%;
+            height: 300px;
+            
+        }
+
+        h1, p
+        {
+            margin: 10px 30px;
+        }
+        .caja2
+        {
+            background-color: rgb(128, 128, 128);
+            float: right;
+            width: 49.9%;
+            height: 250px;
+            margin-top: 50px;
+        }*/
+        div
+        {
+            width: 45%;
+            display: inline-block;
+            padding: 20px;
+        }
+
+        .caja1
+        {
+            background-color: rgb(201, 201, 201);
+        }
+
+        .caja2
+        {
+            background-color: rgb(148, 148, 148);
+        }
+        
+        @media only screen and (max-width: 500px)
+        {
+            div 
+            {
+                display: block;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="caja1">
+        <h1>Titulo parrafo 1</h1>
+        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, omnis nesciunt repellat quia perspiciatis debitis praesentium quasi at placeat vel, nisi quibusdam maiores quos labore dicta obcaecati ad eius ullam.</P>
+    </div>
+    <div class="caja2">
+        <h1>Titulo parrafo 1</h1>
+        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, omnis nesciunt repellat quia perspiciatis debitis praesentium quasi at placeat vel, nisi quibusdam maiores quos labore dicta obcaecati ad eius ullam.</P>
+    </div>
+</body>
+</html>

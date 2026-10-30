@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            background-color: black;
+            padding: 20px;
+        }
+        h1
+        {
+            background: linear-gradient(to right, red, pink, orange, blue);
+            text-align: center;
+            background-clip: text;
+            color: transparent;
+        }
+        .box
+        {
+            background-color: black;
+            padding: 100px;
+            display: block;
+            text-align: center;
+        }
+
+        .gradient-text
+        {
+            background: linear-gradient(to right, white, blue, purple);
+            color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-border
+        {
+            background: linear-gradient(to right, pink, blue, yellow, green);
+            padding: 10px;
+        }
+
+        .rainbow-buttom
+        {
+            background-color: aliceblue;
+            text-decoration: none;
+            color: black;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .rainbow-buttom:hover
+        {
+            background-color: rgb(38, 94, 143);
+            text-decoration: none;
+            color: rgb(253, 253, 253);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .rainbow-buttom:visited
+        {
+            background-color: rgb(85, 91, 97);
+            text-decoration: none;
+            color: rgb(148, 28, 28);
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Prueba de colores gradientes en un h1</h1>
+    <main class="gradient-border">
+        <div class="box">
+            <h2 class="gradient-text">
+                Texto gradiente
+            </h2>
+        </div>
+    </main>
+
+    <a href="#" class="rainbow-buttom">
+        <span>Boton 1</span>
+    </a>
+    
+</body>
+</html>
