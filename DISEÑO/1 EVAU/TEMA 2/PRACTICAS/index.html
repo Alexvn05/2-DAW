@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes - Flexbox y CSS Grid</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="cabecera">
+        <h1>Exploración Visual: Flexbox vs. CSS Grid</h1>
+        <p>Dos galerías independientes con diseño adaptativo y elementos destacados</p>
+    </header>
+
+    <main class="contenedor-principal">
+
+        <!-- SECCIÓN 1: GALERÍA CON FLEXBOX -->
+        <section class="seccion-galeria">
+            <div class="encabezado-seccion">
+                <h2>Galería Flexbox</h2>
+                <span class="etiqueta">display: flex</span>
+            </div>
+
+            <div class="galeria-flex">
+                <!-- Fila 1: 1 destacada + 2 normales -->
+                <figure class="item-flex destacada-flex">
+                    <img src="img/imagen1.jpg" alt="Arquitectura moderna al atardecer">
+                    <figcaption>Destacada 01 — Perspectiva Urbana</figcaption>
+                </figure>
+                <figure class="item-flex">
+                    <img src="img/imagen2.jpg" alt="Detalle minimalista">
+                    <figcaption>Geometría</figcaption>
+                </figure>
+                <figure class="item-flex">
+                    <img src="img/imagen3.jpg" alt="Reflejos en cristal">
+                    <figcaption>Reflejos</figcaption>
+                </figure>
+
+                <!-- Fila 2: 3 normales -->
+                <figure class="item-flex">
+                    <img src="img/imagen4.jpg" alt="Paisaje montañoso">
+                    <figcaption>Horizonte</figcaption>
+                </figure>
+                <figure class="item-flex">
+                    <img src="img/imagen5.jpg" alt="Bosque con niebla">
+                    <figcaption>Niebla Matinal</figcaption>
+                </figure>
+                <figure class="item-flex">
+                    <img src="img/imagen6.jpg" alt="Costa rocosa">
+                    <figcaption>Marea Alta</figcaption>
+                </figure>
+
+                <!-- Fila 3: 1 normal + 1 destacada en otra posición -->
+                <figure class="item-flex">
+                    <img src="img/imagen7.jpg" alt="Callejón histórico">
+                    <figcaption>Casco Antiguo</figcaption>
+                </figure>
+                <figure class="item-flex destacada-flex">
+                    <img src="img/imagen8.jpg" alt="Panorámica nocturna">
+                    <figcaption>Destacada 02 — Luces de la Ciudad</figcaption>
+                </figure>
+
+                <!-- Fila 4: 1 destacada + 1 normal -->
+                <figure class="item-flex destacada-flex">
+                    <img src="img/imagen9.jpg" alt="Desierto al amanecer">
+                    <figcaption>Destacada 03 — Dunas Doradas</figcaption>
+                </figure>
+                <figure class="item-flex">
+                    <img src="img/imagen10.jpg" alt="Oasis natural">
+                    <figcaption>Oasis</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: GALERÍA CON CSS GRID -->
+        <section class="seccion-galeria">
+            <div class="encabezado-seccion">
+                <h2>Galería CSS Grid</h2>
+                <span class="etiqueta">display: grid</span>
+            </div>
+
+            <div class="galeria-grid">
+                <!-- Destacada 1: ocupa 2 columnas y 2 filas -->
+                <figure class="item-grid grid-grande">
+                    <img src="img/imagen11.jpg" alt="Cumbre nevada">
+                    <figcaption>Destacada 01 — Gran Formato (2x2)</figcaption>
+                </figure>
+
+                <figure class="item-grid">
+                    <img src="img/imagen12.jpg" alt="Lago alpino">
+                    <figcaption>Lago Alpino</figcaption>
+                </figure>
+
+                <figure class="item-grid">
+                    <img src="img/imagen13.jpg" alt="Sendero natural">
+                    <figcaption>Sendero</figcaption>
+                </figure>
+
+                <!-- Destacada 2: ocupa 2 columnas (panorámica) -->
+                <figure class="item-grid grid-ancha">
+                    <img src="img/imagen14.jpg" alt="Puente colgante panorámico">
+                    <figcaption>Destacada 02 — Panorámica (2x1)</figcaption>
+                </figure>
+
+                <!-- Destacada 3: ocupa 2 filas (vertical) -->
+                <figure class="item-grid grid-alta">
+                    <img src="img/imagen15.jpg" alt="Rascacielos vertical">
+                    <figcaption>Destacada 03 — Vertical (1x2)</figcaption>
+                </figure>
+
+                <figure class="item-grid">
+                    <img src="img/imagen16.jpg" alt="Estación de tren">
+                    <figcaption>Estación Central</figcaption>
+                </figure>
+
+                <figure class="item-grid">
+                    <img src="img/imagen17.jpg" alt="Jardín botánico">
+                    <figcaption>Invernadero</figcaption>
+                </figure>
+
+                <figure class="item-grid">
+                    <img src="img/imagen18.jpg" alt="Galería de arte">
+                    <figcaption>Museo</figcaption>
+                </figure>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="pie">
+        <p>Práctica de Maquetación Web — HTML5 &amp; CSS3</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+/* =========================================
+   RESET Y ESTILOS GENERALES
+   ========================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-fondo: #0f172a;
+    --color-superficie: #1e293b;
+    --color-texto: #f8fafc;
+    --color-texto-suave: #94a3b8;
+    --color-acento: #38bdf8;
+    --radio-borde: 12px;
+    --espaciado: 16px;
+}
+
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.5;
+}
+
+/* =========================================
+   CABECERA Y ESTRUCTURA PRINCIPAL
+   ========================================= */
+.cabecera {
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    background: linear-gradient(180deg, #1e293b 0%, var(--color-fondo) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cabecera h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.cabecera p {
+    color: var(--color-texto-suave);
+    font-size: 1.05rem;
+}
+
+.contenedor-principal {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.encabezado-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-superficie);
+}
+
+.encabezado-seccion h2 {
+    font-size: 1.6rem;
+}
+
+.etiqueta {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: var(--color-acento);
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Estilos compartidos de las tarjetas de imagen */
+figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radio-borde);
+    background-color: var(--color-superficie);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+figure:hover img {
+    transform: scale(1.06);
+}
+
+figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.5rem 1rem 0.85rem;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.92), transparent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+figure:hover figcaption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   1. GALERÍA CON FLEXBOX (ESCRITORIO)
+   ========================================= */
+.galeria-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaciado);
+}
+
+/* Tarjeta estándar en escritorio: ocupa ~25% descontando el gap */
+.item-flex {
+    flex: 1 1 calc(25% - var(--espaciado));
+    height: 260px;
+}
+
+/* Tarjeta destacada en escritorio: ocupa ~50% (el doble de ancho) */
+.item-flex.destacada-flex {
+    flex: 2 1 calc(50% - var(--espaciado));
+    height: 260px;
+}
+
+/* =========================================
+   2. GALERÍA CON CSS GRID (ESCRITORIO)
+   ========================================= */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    grid-auto-flow: dense; /* Rellena huecos automáticamente */
+    gap: var(--espaciado);
+}
+
+/* Variaciones de tamaño mediante span */
+.grid-grande {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.grid-ancha {
+    grid-column: span 2;
+}
+
+.grid-alta {
+    grid-row: span 2;
+}
+
+/* =========================================
+   PIE DE PÁGINA
+   ========================================= */
+.pie {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--color-texto-suave);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================
+   MEDIA QUERIES - ADAPTACIÓN RESPONSIVE
+   ========================================= */
+
+/* TABLETS (hasta 992px) */
+@media (max-width: 992px) {
+    /* Flexbox en Tablet: 2 columnas base, destacadas al 100% de ancho */
+    .item-flex {
+        flex: 1 1 calc(50% - var(--espaciado));
+        height: 240px;
+    }
+
+    .item-flex.destacada-flex {
+        flex: 1 1 100%;
+        height: 300px;
+    }
+
+    /* Grid en Tablet: pasamos de 4 a 2 columnas */
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 210px;
+    }
+
+    .grid-grande {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .grid-ancha {
+        grid-column: span 2;
+    }
+
+    .grid-alta {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+}
+
+/* MÓVILES (hasta 600px) */
+@media (max-width: 600px) {
+    .cabecera h1 {
+        font-size: 1.65rem;
+    }
+
+    .encabezado-seccion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* Flexbox en Móvil: 1 sola columna fluida */
+    .item-flex,
+    .item-flex.destacada-flex {
+        flex: 1 1 100%;
+    }
+
+    .item-flex {
+        height: 220px;
+    }
+
+    .item-flex.destacada-flex {
+        height: 280px; /* Mantiene jerarquía visual siendo más alta */
+    }
+
+    /* Grid en Móvil: 1 columna, reiniciando los span horizontales */
+    .galeria-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+    }
+
+    .grid-grande {
+        grid-column: span 1;
+        grid-row: span 2; /* Sigue destacando en altura */
+    }
+
+    .grid-ancha {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .grid-alta {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    /* En pantallas táctiles mostramos siempre el título sutilmente */
+    figcaption {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================================
+   JUSTIFICACIÓN Y COMPARATIVA: FLEXBOX VS. CSS GRID
+   ============================================================================
+   Para este tipo de diseño de galería asimétrica, CSS Grid me ha resultado
+   notablemente más práctico y sencillo que Flexbox.
+
+   La razón principal es su naturaleza bidimensional: con CSS Grid pude definir
+   una retícula exacta de columnas y filas y hacer que las imágenes destacadas
+   se expandieran tanto en horizontal como en vertical mediante `grid-column: span`
+   y `grid-row: span`, apoyándome además en `grid-auto-flow: dense` para evitar
+   espacios vacíos. En cambio, Flexbox trabaja en una sola dimensión (fila a fila),
+   lo que obliga a calcular porcentajes de `flex-basis` descontando el `gap` y
+   limita las imágenes destacadas a crecer únicamente a lo ancho dentro de su
+   propia fila, sin poder abarcar múltiples filas de forma natural.
+   ============================================================================ */
