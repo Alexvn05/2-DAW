@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Práctica de Diseño de Interfaces Web: Galerías responsivas con Flexbox y CSS Grid.">
+    <title>Galería de Imágenes | Flexbox y CSS Grid</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="cabecera">
+        <h1 class="cabecera__titulo">Exposición Visual Web</h1>
+        <p class="cabecera__subtitulo">Comparativa práctica de maquetación con Flexbox y CSS Grid</p>
+        <nav class="navegacion" aria-label="Navegación principal">
+            <ul class="navegacion__lista">
+                <li><a href="#seccion-flex" class="navegacion__enlace">Galería Flexbox</a></li>
+                <li><a href="#seccion-grid" class="navegacion__enlace">Galería CSS Grid</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor-principal">
+
+        <!-- PRIMERA GALERÍA: FLEXBOX -->
+        <section id="seccion-flex" class="seccion-galeria">
+            <header class="seccion-galeria__encabezado">
+                <h2 class="seccion-galeria__titulo">1. Galería con Flexbox</h2>
+                <p class="seccion-galeria__descripcion">Distribución unidimensional flexible con elementos destacados mediante <code>flex-grow</code> y <code>flex-basis</code>.</p>
+            </header>
+
+            <div class="galeria-flex">
+                <!-- Destacada 1 (Fila 1) -->
+                <figure class="galeria-flex__item galeria-flex__item--destacada">
+                    <img src="img/imagen1.jpg" alt="Arquitectura moderna al atardecer" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">Destacada 01 · Arquitectura</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen2.jpg" alt="Detalle minimalista en blanco y negro" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">02 · Minimalismo</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen3.jpg" alt="Paisaje montañoso con niebla" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">03 · Naturaleza</figcaption>
+                </figure>
+
+                <!-- Fila 2 con Destacada 2 en el centro -->
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen4.jpg" alt="Calle urbana iluminada de noche" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">04 · Ciudad</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item galeria-flex__item--destacada">
+                    <img src="img/imagen5.jpg" alt="Vista panorámica de la costa" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">Destacada 05 · Costa</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen6.jpg" alt="Texturas geométricas en fachada" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">06 · Geometría</figcaption>
+                </figure>
+
+                <!-- Fila 3 con Destacada 3 al final -->
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen7.jpg" alt="Sendero en bosque otoñal" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">07 · Bosque</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item">
+                    <img src="img/imagen8.jpg" alt="Reflejos sobre el agua" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">08 · Reflejos</figcaption>
+                </figure>
+
+                <figure class="galeria-flex__item galeria-flex__item--destacada">
+                    <img src="img/imagen9.jpg" alt="Puente colgante entre nubes" class="galeria-flex__imagen">
+                    <figcaption class="galeria-flex__pie">Destacada 09 · Horizonte</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- SEGUNDA GALERÍA: CSS GRID -->
+        <section id="seccion-grid" class="seccion-galeria">
+            <header class="seccion-galeria__encabezado">
+                <h2 class="seccion-galeria__titulo">2. Galería con CSS Grid</h2>
+                <p class="seccion-galeria__descripcion">Distribución bidimensional en retícula utilizando <code>span</code> en columnas y filas con flujo denso.</p>
+            </header>
+
+            <div class="galeria-grid">
+                <!-- Destacada 1: Ocupa 2 columnas y 2 filas -->
+                <figure class="galeria-grid__item galeria-grid__item--grande">
+                    <img src="img/imagen10.jpg" alt="Panorámica aérea de metrópoli" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">Destacada 01 · 2x2</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen11.jpg" alt="Interior de biblioteca clásica" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">02 · Estudio</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen12.jpg" alt="Escultura contemporánea" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">03 · Arte</figcaption>
+                </figure>
+
+                <!-- Destacada 2: Panorámica horizontal (2 columnas, 1 fila) -->
+                <figure class="galeria-grid__item galeria-grid__item--ancha">
+                    <img src="img/imagen13.jpg" alt="Desierto con dunas al amanecer" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">Destacada 02 · Panorámica 2x1</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen14.jpg" alt="Detalle de hojas tropicales" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">04 · Botánica</figcaption>
+                </figure>
+
+                <!-- Destacada 3: Vertical alta (1 columna, 2 filas) -->
+                <figure class="galeria-grid__item galeria-grid__item--alta">
+                    <img src="img/imagen15.jpg" alt="Rascacielos mirando hacia el cielo" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">Destacada 03 · Vertical 1x2</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen16.jpg" alt="Estación de tren histórica" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">05 · Transporte</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen17.jpg" alt="Lago alpino cristalino" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">06 · Agua</figcaption>
+                </figure>
+
+                <figure class="galeria-grid__item">
+                    <img src="img/imagen18.jpg" alt="Atardecer sobre faro costero" class="galeria-grid__imagen">
+                    <figcaption class="galeria-grid__pie">07 · Faro</figcaption>
+                </figure>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="pie-pagina">
+        <p>Diseño de Interfaces Web · Práctica de Maquetación Nativa (HTML5 + CSS3)</p>
+    </footer>
+
+</body>
+</html>
