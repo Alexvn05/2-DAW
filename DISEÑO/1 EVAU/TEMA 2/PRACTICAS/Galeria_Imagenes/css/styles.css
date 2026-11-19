@@ -34,9 +34,29 @@ nav>ul>li
 
 nav>ul>li>a
 {
-    color: white;
+    color: rgb(19, 19, 115);
     text-decoration: none;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 10px;
+    
+}
+
+nav>ul>li>a:hover
+{
+    color: rgb(57, 57, 179);
+    text-decoration: none;
+    background-color: rgb(180, 180, 180);
+    padding: 15px 30px;
+    border-radius: 10px;
+    
+}
+
+nav>ul>li>a:visited
+{
+    color: rgb(57, 57, 179);
+    text-decoration: none;
+    background-color: rgb(192, 255, 250);
     padding: 10px 20px;
     border-radius: 10px;
     
@@ -71,8 +91,15 @@ nav>ul>li>a
     justify-content: center;
 }
 
-/* Cajas normales (4 por fila aprox.) */
-.div-flex {
+/* Hacer que al pasar el raton se agrande 1.05*/
+.div-flex img:hover 
+{
+    transform: scale(1.05);
+}
+
+/* Cajas normales */
+.div-flex 
+{
     flex: 1 1 calc(25% - 15px);
     height: 270px;
     overflow: hidden;
@@ -80,15 +107,17 @@ nav>ul>li>a
     background-color: rgb(255, 255, 255);
 }
 
-/* Cajas destacadas (ocupan el doble de ancho) */
-.div-flex.destacada {
+/* Cajas destacadas */
+.div-flex.destacada 
+{
     flex: 2 1 calc(50% - 15px);
     height: 270px;
     border: 3px solid blueviolet;
 }
 
 
-.div-flex img {
+.div-flex img 
+{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -96,12 +125,9 @@ nav>ul>li>a
     transition: transform 0.3s ease;
 }
 
-.div-flex img:hover {
-    transform: scale(1.05);
-}
-
 /* GRID */
-.grid-imagenes {
+.grid-imagenes 
+{
     background-color: rgb(225, 225, 225);
     padding: 15px;
     display: grid;
@@ -110,19 +136,27 @@ nav>ul>li>a
     gap: 15px;
 }
 
-.div-grid {
+.div-grid img:hover 
+{
+    transform: scale(1.05);
+}
+
+.div-grid 
+{
     overflow: hidden;
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
 }
 
-/* Destacadas con span 2 para igualar las posiciones de Flex */
-.div-grid.destacada {
+/* Destacadas con span 2 para igualar las posiciones de Flexbox */
+.div-grid.destacada 
+{
     grid-column: span 2;
     border: 3px solid blueviolet;
 }
 
-.div-grid img {
+.div-grid img 
+{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -130,14 +164,17 @@ nav>ul>li>a
     transition: transform 0.3s ease;
 }
 
+/* CONFIGURACION DE ALGUNAS IMAGENES */
 /* Escudo */
-.div-grid.escudo {
+.div-grid.escudo 
+{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.div-grid.escudo img {
+.div-grid.escudo img 
+{
     width: auto;
     height: 80%; 
     padding: 0;
@@ -146,24 +183,28 @@ nav>ul>li>a
 }
 
 /* Escudo antiguo */
-.div-grid.escudo-antiguo img {
+.div-grid.escudo-antiguo img 
+{
     object-fit: contain;
     padding: 0px;
     transform: scale(1.65);
 }
 
-.div-grid.escudo-antiguo img:hover {
+.div-grid.escudo-antiguo img:hover 
+{
     transform: scale(1.8);
 }
 
 /* Liverpool */
-.div-grid.liverpool img {
+.div-grid.liverpool img 
+{
     object-fit: contain;
     padding: 0px;
     transform: scale(1.55);
 }
 
-.div-grid.liverpool img:hover {
+.div-grid.liverpool img:hover 
+{
     transform: scale(1.60);
 }
 
@@ -175,35 +216,83 @@ nav>ul>li>a
 }
 
 /* RealMadrid */
-.div-grid.realmadrid img {
+.div-grid.realmadrid img 
+{
     object-fit: contain;
     transform: scale(1.20);
 }
 
-.div-grid.realmadrid img:hover {
+.div-grid.realmadrid img:hover 
+{
     object-fit: contain;
     transform: scale(1.25);
 }
 
 /* Madrid */
-.div-grid.madrid img {
+.div-grid.madrid img 
+{
     object-position: 18% center;
 }
 
 
 /* Messi */
-.div-grid.messi img {
+.div-grid.messi img 
+{
     object-position: center 25%;
     transform-origin: 55% 20%;
 }
 
-.div-grid.messi img:hover {
+.div-grid.messi img:hover 
+{
     transform: scale(1.8);
     transition: transform 0.7s ease;
 
 }
 
 
-.div-grid img:hover {
-    transform: scale(1.05);
+/* TABLETS (hasta 1024px) */
+@media screen and (max-width: 1024px) {
+    .contenedor {
+        margin: 20px 6%;
+    }
+
+    .div-flex {
+        flex: 1 1 calc(50% - 15px);
+        height: 220px;
+    }
+
+    .div-flex.destacada {
+        flex: 1 1 100%;
+        height: 240px;
+    }
+
+    .grid-imagenes {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 220px;
+    }
+}
+
+/* MOVILES (hasta 600px) */
+@media screen and (max-width: 600px) {
+    .contenedor {
+        margin: 15px 3%;
+        padding: 12px;
+    }
+
+    .div-flex,
+    .div-flex.destacada {
+        flex: 1 1 100%;
+        height: 200px;
+    }
+
+    .div
+
+    .grid-imagenes {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+    }
+
+    .div-grid.destacada {
+        grid-column: span 1;
+    }
 }
