@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diseño006 – Flexbox y Grid</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; margin: 16px; color:#1f2937; }
+  h2 { margin: 30px 0 8px; font-size: 1.15rem; }
+  .pink { background:#e84fa8; } .orange { background:#f5a623; } .blue { background:#0000ff; } .green { background:#9af04a; }
+  .note { font-size: .85rem; color:#555; margin: 4px 0 8px; }
+
+  /* ===== FLEX 1: reproducir ejemplo (altura igual, se ajusta al contenido) ===== */
+  .f1 { display: flex; gap: 6px; background:#3a3aff; padding:6px; color:#fff; font-size:.8rem; }
+  .f1 > div { padding: 6px; background:#3a3aff; border:1px solid #fff; }
+  .f1 > div:first-child { flex: 3; } .f1 > div:last-child { flex: 1; }
+
+  /* ===== FLEX 2: direction / wrap ===== */
+  .caja { width: 60px; height: 60px; margin: 4px; background:#e84fa8; flex: none; }
+  .fx { display:flex; border:1px dashed #999; }
+  .col { flex-direction: column; width: 80px; } .rev { flex-direction: row-reverse; }
+  .wrap { flex-wrap: wrap; width: 300px; }
+
+  /* ===== FLEX 3 / 4: prácticas p.42 y p.45 ===== */
+  .p42 { display:flex; flex-wrap: wrap; width: 480px; border:1px dashed #999; }
+  .p42 .s { flex: 1 0 70px; height: 70px; margin: 4px; background:#e84fa8; }
+  .p42 .s.b { background:#0000ff; }
+  .p42 .g { flex: 1 0 45%; height: 70px; margin: 4px; background:#e84fa8; }
+  .p42 .g.o { background:#f5a623; }
+  .p45 { flex-wrap: wrap-reverse; }      /* ← único cambio: la 2ª línea pasa arriba */
+
+  /* ===== FLEX 5: margin:auto ===== */
+  .ma { width: 220px; height: 160px; border:1px solid #999; display:flex; }
+  .ma .x { width: 40px; height: 40px; background:blue; margin: auto; }                 /* centro */
+  .ma--c { position: relative; display:block; }
+  .ma--c .e { position:absolute; width:36px; height:36px; background:orange; }
+  .ma--c4 { display:flex; flex-wrap: wrap; justify-content: space-between; align-content: space-between; }
+  .ma--c4 .e { position: static; }
+
+  /* ===== FLEX 6: order (menú arriba) ===== */
+  .wrapper { display:flex; flex-direction: column; width: 260px; border:1px dashed #999; }
+  .wrapper > * { order: 1; padding: 8px; background:#ddd; border:1px solid #fff; }
+  .wrapper > .menu { order: 0; background:#9af04a; }           /* order menor → sube */
+  .ord { display:flex; width: 300px; } .ord div { flex:1; height:50px; }
+  .ord .o10 { order: 10; }
+
+  /* ===== FLEX 7: formulario con BEM ===== */
+  .form { display:flex; gap: 24px; align-items: center; padding: 24px; background:#dda0dd; max-width: 640px; }
+  .form__logo { flex: 0 0 160px; height: 160px; background:#fff; border-radius: 16px; display:grid; place-items:center; font: 700 4rem Arial; color:#a24fd1; }
+  .form__body { flex: 1; display:flex; flex-direction: column; gap: 10px; }
+  .form__label { font-size:.7rem; color:#fff; background:#8f9fd8; padding:2px 6px; }
+  .form__input, .form__textarea { background: transparent; border: 0; border-bottom: 2px solid #fff; padding: 6px; font: inherit; }
+  .form__textarea { min-height: 80px; resize: vertical; border: 2px solid #fff; }
+  .form__button { background:#8f9fd8; color:#fff; border:0; padding:10px; cursor:pointer; }
+  .form__button:focus-visible, .form__input:focus-visible, .form__textarea:focus-visible { outline: 3px solid #fff; }
+  @media (max-width: 500px) { .form { flex-direction: column; } .form__body { width:100%; } }
+
+  /* ===== GRID 1: grid-row / grid-column ===== */
+  .g1 { display:grid; width: 420px; height: 240px; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 3px; background:#e8602a; padding:6px; }
+  .g1 div { border:1px solid #333; font-size:10px; }
+  .g1 .a { background:blue;   grid-column: 1 / 4;   grid-row: 1 / 3; }
+  .g1 .b { background:#9af04a; grid-column: 4 / 5;  grid-row: 1 / 2; }
+  .g1 .c { background:#e8362a; grid-column: 4 / 5;  grid-row: 2 / 4; }
+  .g1 .d { background:#ffff4d; grid-column: 1 / 4;  grid-row: 3 / 5; }
+  .g1 .e { background:#9af04a; grid-column: 4 / 5;  grid-row: 4 / 5; }
+  /* con span: grid-row: 1 / span 2; grid-column: 1 / span 3; */
+
+  /* ===== GRID 2: repeat() ===== */
+  .g2 { display:grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 70px); gap: 4px; background:#e8602a; padding:6px; width: 460px; }
+  .g2 div { background:#9af04a; border:1px solid #333; }
+  .g2 .x1 { background:blue; } .g2 .x2 { background:#e8362a; grid-column: span 2; } .g2 .x3 { background:#ffff4d; grid-column: span 3; }
+
+  /* ===== GRID 3: implícito/explícito + dense ===== */
+  .g3 { display:grid; grid-template-columns: repeat(5, 1fr); grid-auto-rows: 40px; gap: 4px; background:#e8602a; padding:6px; width: 360px; }
+  .g3 div { background:#9af04a; border:1px solid #333; font-size:11px; }
+  .g3 .w { grid-column: 5 / 7; }       /* crea una 6ª columna implícita… */
+  .g3--dense { grid-auto-flow: dense; }
+  .g3--col { grid-auto-flow: column; grid-template-rows: repeat(2, 40px); grid-template-columns: none; grid-auto-columns: 60px; }
+
+  /* ===== GRID 4: auto-fill vs auto-fit ===== */
+  .af { display:grid; gap:6px; background:#888; padding:6px; width: 100%; max-width: 520px; }
+  .af div { background:#9af04a; border:1px solid #333; height:50px; text-align:center; }
+  .af--fill { grid-template-columns: repeat(auto-fill, minmax(100px, 200px)); }
+  .af--fit  { grid-template-columns: repeat(auto-fit,  minmax(100px, 200px)); }
+  /* auto-fill: crea tantas pistas como quepan (aunque estén vacías);
+     auto-fit: colapsa las pistas vacías y estira las columnas ocupadas hasta 200px. */
+
+  /* ===== GRID 5: 3x3 pegado abajo a la derecha / place-self ===== */
+  .g5 { display:grid; grid-template-columns: repeat(3, 40px); grid-template-rows: repeat(3, 50px); gap: 14px; justify-content: end; align-content: end; background:#808080; height: 260px; width: 420px; padding: 10px; }
+  .g5 div { background:#9af04a; border:1px solid #333; display:grid; place-items:center; }
+  .g6 { display:grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 10px; background:#808080; padding:10px; width: max-content; }
+  .g6 div { width: 50px; height: 50px; border:1px solid #333; background:#e8362a; display:grid; place-items:center; }
+  .g6 .c1,.g6 .c3,.g6 .c7,.g6 .c9 { background:#ffff4d; }
+  .g6 .c5 { background:#9af04a; place-self: center center; }
+  .g6 .c1 { place-self: start start; } .g6 .c3 { place-self: start end; }
+  .g6 .c7 { place-self: end start; }   .g6 .c9 { place-self: end end; }
+  .g6 .c2 { place-self: start center; } .g6 .c4 { place-self: center start; }
+  .g6 .c6 { place-self: center end; }   .g6 .c8 { place-self: end center; }
+
+  /* ===== GRID 6: galería con grid ===== */
+  .gal { display:grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); grid-auto-rows: 80px; grid-auto-flow: dense; gap: 6px; background:#e8362a; padding:6px; max-width: 560px; }
+  .gal div { background: linear-gradient(135deg,#6a11cb,#2575fc); border-radius:4px; }
+  .gal .big  { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg,#ff0080,#7928ca); }
+  .gal .wide { grid-column: span 2; } .gal .tall { grid-row: span 2; background: linear-gradient(135deg,#00c6ff,#0072ff); }
+
+  /* ===== GRID 7: grid-template-areas ===== */
+  .areas { display:grid; gap:6px; width: 360px; height: 220px;
+    grid-template-areas: "head head" "main side" "foot foot"; grid-template-columns: 2fr 1fr; grid-template-rows: auto 1fr auto; }
+  .areas > * { padding:6px; font-size:.8rem; }
+  .areas .h { grid-area: head; background:#aee; } .areas .m { grid-area: main; background:#f5a623; }
+  .areas .s { grid-area: side; background:#f7b6c2; } .areas .f { grid-area: foot; background:#9af04a; }
+
+  /* ===== Media queries: la misma estructura con flex y con grid ===== */
+  .mq { max-width: 520px; margin-bottom: 14px; }
+  .mq > * { padding: 8px; font-size:.8rem; }
+  .mq .h { background:#aee; } .mq .m { background:#f5a623; } .mq .s { background:#f7b6c2; } .mq .f { background:#9af04a; }
+  .mq--flex { display:flex; flex-wrap: wrap; }
+  .mq--flex .h, .mq--flex .f { flex: 1 1 100%; }
+  .mq--flex .m { flex: 2 1 0; min-height: 140px; } .mq--flex .s { flex: 1 1 0; }
+  .mq--grid { display:grid; grid-template-columns: 2fr 1fr; grid-template-areas: "h h" "m s" "f f"; }
+  .mq--grid .h { grid-area:h; } .mq--grid .m { grid-area:m; min-height:140px; } .mq--grid .s { grid-area:s; } .mq--grid .f { grid-area:f; }
+  @media (max-width: 480px) {
+    .mq--flex { flex-direction: column; }
+    .mq--flex .m, .mq--flex .s { flex: 1 1 auto; }
+    .mq--grid { grid-template-columns: 1fr; grid-template-areas: "h" "m" "s" "f"; }
+  }
+</style>
+</head>
+<body>
+<h1>Diseño006 – Flexbox y Grid</h1>
+
+<h2>FLEX · reproducir el ejemplo (alturas iguales y ajuste al contenido)</h2>
+<div class="f1"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis voluptatibus est dolores, sunt ratione commodi minus dolorem ullam, laborum quasi, sapiente quo asperiores sequi. Lorem ipsum dolor sit amet consectetur.</div><div>Texto corto; su caja se estira a la misma altura.</div></div>
+
+<h2>FLEX · flex-direction: column / row-reverse / flex-wrap</h2>
+<div style="display:flex;gap:20px;align-items:flex-start">
+  <div class="fx col"><div class="caja"></div><div class="caja"></div><div class="caja"></div></div>
+  <div class="fx rev"><div class="caja"></div><div class="caja" style="background:#0000ff"></div><div class="caja"></div></div>
+  <div class="fx wrap"><div class="caja"></div><div class="caja"></div><div class="caja"></div><div class="caja"></div><div class="caja"></div><div class="caja"></div></div>
+</div>
+<p class="note">flex-flow: column wrap solo envuelve en nueva columna si el contenedor tiene altura fija (p. ej. height: 150px); sin altura, no hay límite y todo queda en una columna.</p>
+
+<h2>FLEX · práctica p.42 (wrap) y p.45 (wrap-reverse)</h2>
+<div class="p42"><div class="s b"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="g"></div><div class="g o"></div></div>
+<br>
+<div class="p42 p45"><div class="s b"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="s"></div><div class="g"></div><div class="g o"></div></div>
+
+<h2>FLEX · margin: auto (centro y 4 esquinas)</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+  <div class="ma"><div class="x"></div></div>
+  <div class="ma ma--c ma--c4"><div class="e"></div><div class="e"></div><div class="e"></div><div class="e"></div></div>
+</div>
+<p class="note">margin:auto en un flex item reparte TODO el espacio libre → centra en ambos ejes. Esquinas: margin-left:auto (derecha), margin-top:auto (abajo), etc. Alternativa: justify-content / align-content: space-between.</p>
+
+<h2>FLEX · order</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+  <div class="wrapper"><header>Header</header><main>Contenido</main><footer>Footer</footer><nav class="menu">Menú (va último en el HTML pero sube)</nav></div>
+  <div><div class="ord"><div class="pink"></div><div class="blue"></div><div class="orange o10"></div></div><br>
+       <div class="ord" style="flex-direction:row-reverse"><div class="pink"></div><div class="blue"></div><div class="orange o10"></div></div>
+       <p class="note">Con order:10 el naranja es el último del orden; con row-reverse queda a la IZQUIERDA.</p></div>
+</div>
+
+<h2>FLEX · formulario con BEM</h2>
+<form class="form" onsubmit="return false">
+  <div class="form__logo" aria-hidden="true">Z</div>
+  <div class="form__body">
+    <label class="form__label" for="n">Nombre</label><input class="form__input" id="n" type="text">
+    <label class="form__label" for="e">Email</label><input class="form__input" id="e" type="email">
+    <label class="form__label" for="m">Mensaje</label><textarea class="form__textarea" id="m"></textarea>
+    <button class="form__button" type="submit">Enviar</button>
+  </div>
+</form>
+
+<h2>GRID · grid-row / grid-column</h2>
+<div class="g1"><div class="a">1</div><div class="b">2</div><div class="c">3</div><div class="d">4</div><div class="e">5</div></div>
+
+<h2>GRID · repeat(), span</h2>
+<div class="g2"><div class="x1"></div><div class="x2"></div><div class="x3"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<h2>GRID · implícito / explícito y dense</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+  <div class="g3"><div>1</div><div>2</div><div class="w">3 (5/7)</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div></div>
+  <div class="g3 g3--dense"><div>1</div><div>2</div><div class="w">3 (5/7)</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div></div>
+  <div class="g3 g3--col"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div></div>
+</div>
+
+<h2>GRID · auto-fill vs auto-fit (con 3 elementos)</h2>
+<div class="af af--fill"><div>1</div><div>2</div><div>3</div></div><br>
+<div class="af af--fit"><div>1</div><div>2</div><div>3</div></div>
+
+<h2>GRID · 3×3 pegado abajo-derecha y alineación con place-self</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+  <div class="g5"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div></div>
+  <div class="g6"><div class="c1">1</div><div class="c2">2</div><div class="c3">3</div><div class="c4">4</div><div class="c5">5</div><div class="c6">6</div><div class="c7">7</div><div class="c8">8</div><div class="c9">9</div></div>
+</div>
+
+<h2>GRID · galería</h2>
+<div class="gal"><div class="big"></div><div></div><div></div><div class="tall"></div><div class="wide"></div><div></div><div></div><div class="wide"></div><div></div><div></div></div>
+
+<h2>GRID · grid-template-areas</h2>
+<div class="areas"><div class="h">Header</div><div class="m">Main</div><div class="s">Aside</div><div class="f">Footer</div></div>
+
+<h2>Media queries · misma estructura con Flexbox y con Grid (reduce la ventana &lt; 480px)</h2>
+<div class="mq mq--flex"><div class="h">Header (flex)</div><div class="m">Main</div><div class="s">Aside</div><div class="f">Footer</div></div>
+<div class="mq mq--grid"><div class="h">Header (grid)</div><div class="m">Main</div><div class="s">Aside</div><div class="f">Footer</div></div>
+</body>
+</html>

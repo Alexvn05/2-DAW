@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diseño003 – Tablas y float</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 16px; }
+  h2 { margin: 24px 0 8px; }
+  table { border-collapse: collapse; width: 260px; height: 180px; table-layout: fixed; }
+  td, th { background: #666; border: 3px solid #fff; padding: 0; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 16px; }
+  .tabs figure { margin: 0; }
+  /* ---- Layouts con float ---- */
+  .l { position: relative; width: 260px; height: 180px; background: #fff; }
+  .l::after { content: ""; display: block; clear: both; }          /* clearfix */
+  .b { float: left; background: #666; border: 3px solid #fff; box-sizing: border-box; }
+  .r { float: right; }
+  .w25{width:25%} .w33{width:33%} .w34{width:34%} .w35{width:35%} .w45{width:45%} .w50{width:50%} .w55{width:55%} .w65{width:65%} .w75{width:75%} .w100{width:100%}
+  .h8{height:8%} .h12{height:12%} .h15{height:15%} .h20{height:20%} .h24{height:24%} .h25{height:25%} .h27{height:27%} .h28{height:28%} .h30{height:30%} .h37{height:37%} .h38{height:38%} .h42{height:42%} .h45{height:45%} .h50{height:50%} .h55{height:55%} .h60{height:60%} .h65{height:65%} .h75{height:75%} .h80{height:80%}
+  /* Responsive: en móvil cada caja ocupa todo el ancho y una debajo de otra */
+  @media (max-width: 600px) {
+    table, .l { width: 100%; height: auto; }
+    td, th { display: block; width: auto !important; min-height: 36px; }
+    .b, .r { float: none; width: 100% !important; height: 36px !important; }
+  }
+</style>
+</head>
+<body>
+
+<h2>1. Tabla básica (slide 18)</h2>
+<table border="1" style="width:auto;height:auto">
+  <caption>Título de la tabla</caption>
+  <tr><th>Col.Cab.1</th><th>Col.Cab.2</th></tr>
+  <tr><td style="background:#fff">Celda 1</td><td style="background:#fff">Celda 2</td></tr>
+</table>
+
+<h2>2. Combinar columnas (colspan) y filas (rowspan) (slides 19-20)</h2>
+<table border="1" style="width:auto;height:auto">
+  <caption>Combinación de columnas</caption>
+  <tr><th colspan="2">Celda Combinada</th><th>Celda Normal</th><th colspan="2">Celda Combinada</th></tr>
+  <tr><td>C1</td><td>C2</td><td>C3</td><td>C4</td><td>C5</td></tr>
+  <tr><td>C6</td><td>C7</td><td>C8</td><td colspan="2">C9 Comb.</td></tr>
+</table>
+<br>
+<table border="1" style="width:auto;height:auto">
+  <caption>Combinación de filas</caption>
+  <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+  <tr><td rowspan="2">Celda Combinada</td><td>Celda 5</td><td rowspan="2">Celda Combinada</td></tr>
+  <tr><td>Celda 7</td></tr>
+</table>
+
+<h2>3. Práctica de tablas: layouts con table (cuadrícula base de 4 columnas)</h2>
+<div class="tabs">
+  <figure><table>
+    <tr><td colspan="2" rowspan="2"></td><td colspan="2"></td></tr>
+    <tr><td colspan="2"></td></tr>
+    <tr style="height:8%"><td colspan="2"></td><td colspan="2"></td></tr>
+    <tr><td colspan="2"></td><td colspan="2"></td></tr>
+  </table><figcaption>Layout 1</figcaption></figure>
+
+  <figure><table>
+    <tr><td></td><td colspan="3" rowspan="4"></td></tr>
+    <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+    <tr><td colspan="4" style="height:50%"></td></tr>
+  </table><figcaption>Layout 2</figcaption></figure>
+
+  <figure><table>
+    <tr style="height:25%"><td></td><td colspan="3"></td></tr>
+    <tr><td rowspan="2"></td><td rowspan="2"></td><td colspan="2"></td></tr>
+    <tr><td colspan="2"></td></tr>
+  </table><figcaption>Layout 3</figcaption></figure>
+
+  <figure><table>
+    <tr style="height:25%"><td colspan="4"></td></tr>
+    <tr><td></td><td colspan="2"></td><td></td></tr>
+    <tr style="height:10%"><td colspan="4"></td></tr>
+  </table><figcaption>Layout 4</figcaption></figure>
+</div>
+<p><em>Los layouts 5-8 de la imagen son variantes de estos mismos (se resuelven igual con colspan/rowspan); las tablas se usan hoy solo para maquetar emails.</em></p>
+
+<h2>4. Los 8 layouts replicados con float (+ responsive con @media)</h2>
+<div class="tabs">
+  <figure><div class="l">
+    <div class="b w50 h50"></div><div class="b w50 h25"></div><div class="b w50 h25"></div>
+    <div class="b w50 h8"></div><div class="b w50 h8"></div><div class="b w50 h42"></div><div class="b w50 h42"></div>
+  </div><figcaption>1</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w75 h50 r"></div>
+    <div class="b w25 h12"></div><div class="b w25 h12"></div><div class="b w25 h12"></div><div class="b w25 h12"></div>
+    <div class="b w100 h50"></div>
+  </div><figcaption>2</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w25 h25"></div><div class="b w75 h25"></div>
+    <div class="b w34 h75"></div><div class="b w33 h75"></div><div class="b w33 h37"></div><div class="b w33 h38"></div>
+  </div><figcaption>3</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w100 h25"></div>
+    <div class="b w25 h65"></div><div class="b w50 h65"></div><div class="b w25 h65"></div>
+    <div class="b w100 h8"></div>
+  </div><figcaption>4</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w50 h50"></div><div class="b w50 h25"></div><div class="b w50 h25"></div>
+    <div class="b w50 h20"></div><div class="b w50 h15"></div><div class="b w50 h15"></div>
+  </div><figcaption>5</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w75 h55 r"></div><div class="b w75 h45 r"></div>
+    <div class="b w25 h12"></div><div class="b w25 h12"></div><div class="b w25 h12"></div><div class="b w25 h24"></div>
+  </div><figcaption>6</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w25 h20"></div><div class="b w75 h20"></div>
+    <div class="b w25 h50"></div><div class="b w50 h80"></div><div class="b w25 h30"></div>
+  </div><figcaption>7</figcaption></figure>
+
+  <figure><div class="l">
+    <div class="b w100 h25"></div>
+    <div class="b w45 h60"></div><div class="b w45 h60"></div><div class="b w65 h8"></div>
+  </div><figcaption>8</figcaption></figure>
+</div>
+
+<h2>5. Replicar con float (código de la slide 27)</h2>
+<style>
+  .demo-float div { margin: 5px; float: left; width: 100px; height: 100px; color:#fff; }
+  .caja1 { background: rgb(46,187,187); width: 200px !important; height: 200px !important; }
+  .caja2 { background: #e8743b; } .caja3 { background: #8a4fff; }
+  .demo-float::after { content:""; display:block; clear:both; }
+</style>
+<div class="demo-float" style="background:rgb(98,68,83);padding:6px">
+  <div class="caja1">Caja1</div><div class="caja2">Caja2</div><div class="caja3">Caja3</div>
+</div>
+
+</body>
+</html>

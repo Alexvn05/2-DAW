@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú responsive solo CSS (BEM)</title>
+<!-- Sustituye el kit por el tuyo de fontawesome.com/start -->
+<script src="https://kit.fontawesome.com/697908d42a.js" crossorigin="anonymous"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #4f5be3; min-height: 100vh; }
+  a { color: #fff; }
+  .nav { background: #0a0a9a; }
+  .nav__ul { list-style: none; display: flex; gap: 24px; padding: 14px 40px; }
+  .nav__li i, .nav__responsive-li i { margin-right: 6px; color:#fff; }
+  .nav__li a { font-size: .9rem; }
+
+  /* versión móvil: oculta por defecto en escritorio */
+  .nav__responsive-ul { display: none; list-style: none; }
+  .nav__toggle { position: absolute; opacity: 0; pointer-events: none; }      /* checkbox hack: sin JS */
+  .nav__responsive-button-continer { background: #7497cc; text-align: right; padding: 8px 12px; }
+  .nav__responsive-button { color: #fff; font-size: 1.4rem; cursor: pointer; display: inline-block; }
+  .nav__li-continer { display: none; width: 160px; background: #301a7a; margin: 20px 0 0 8px; }
+  .nav__responsive-li { padding: 10px; font-size: .85rem; border-bottom: 1px solid #4a2da0; list-style: none; }
+  .nav__toggle:checked ~ .nav__li-continer { display: block; }
+  .nav__toggle:focus-visible ~ .nav__responsive-button-continer .nav__responsive-button { outline: 3px solid #fff; }
+
+  @media (max-width: 600px) {
+    .nav { background: transparent; }
+    .nav__ul { display: none; }
+    .nav__responsive-ul { display: block; }
+  }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Navegación principal">
+  <ul class="nav__ul">
+    <li class="nav__li"><i class="fas fa-house-user"></i><a href="#">Inicio</a></li>
+    <li class="nav__li"><i class="fas fa-users"></i><a href="#">Nosotros</a></li>
+    <li class="nav__li"><i class="fas fa-concierge-bell"></i><a href="#">Servicios</a></li>
+    <li class="nav__li"><i class="fas fa-file-signature"></i><a href="#">Contacto</a></li>
+  </ul>
+
+  <ul class="nav__responsive-ul">
+    <input type="checkbox" id="menu" class="nav__toggle" aria-label="Abrir menú">
+    <label for="menu" class="nav__responsive-button-continer"><span class="nav__responsive-button fa fa-bars"></span></label>
+    <div class="nav__li-continer">
+      <li class="nav__responsive-li"><i class="fas fa-house-user"></i><a href="#">Inicio</a></li>
+      <li class="nav__responsive-li"><i class="fas fa-users"></i><a href="#">Nosotros</a></li>
+      <li class="nav__responsive-li"><i class="fas fa-concierge-bell"></i><a href="#">Servicios</a></li>
+      <li class="nav__responsive-li"><i class="fas fa-file-signature"></i><a href="#">Contacto</a></li>
+    </div>
+  </ul>
+</nav>
+</body>
+</html>

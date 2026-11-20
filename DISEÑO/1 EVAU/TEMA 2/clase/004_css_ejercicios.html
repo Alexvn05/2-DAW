@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diseño004 – Ejercicios CSS</title>
+<!-- Ejercicio fuentes: dos fuentes de Google Fonts (alternativa a descargar el .ttf y usar @font-face) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* Con archivo descargado sería:
+     @font-face { font-family: fuente_titulos; src: url(fonts/PlayfairDisplay.ttf); }
+     @font-face { font-family: fuente_parrafos; src: url(fonts/Roboto.ttf); }  */
+  :root { --primary: #ff6a00; --text: #1f2937; }
+  * { box-sizing: border-box; padding: 0; margin: 0; }          /* reset básico */
+  body { font-family: Roboto, sans-serif; color: var(--text); margin: 16px; line-height: 1.5; }
+  h1, h2 { font-family: "Playfair Display", serif; }
+  h2 { margin: 30px 0 8px; font-size: 1.3rem; }
+  .z { margin: 12px 0; }
+
+  /* ===== Problema 1 (especificidad) ===== */
+  .rojo { color: red !important; }
+  p .rojo { color: yellow; }          /* ningún .rojo es descendiente de <p>: no se aplica */
+  #verde { color: green; }
+  #naranja { color: orange; }
+  .rosa { color: pink; }
+
+  /* ===== Problema 2 (herencia) ===== */
+  .p2 h1 { color: green; }
+  .p2 p { color: green; border: 1px solid green; }
+  .p2 span { border: 1px solid blue; color: inherit; }
+  .p2 a { color: inherit; border-bottom: 1px solid blue; text-decoration: none; }
+
+  /* ===== Problema 3 ===== */
+  .mark1 { color: yellow; }
+  .mark1 { color: green; }
+  #lista p { color: blue; }
+  .mark { color: red; }
+  /* Solución: bajar la especificidad del padre */
+  :where(.lista) p { color: blue; }        /* (0,0,1) → ahora .mark / .mark1 ganan */
+
+  /* ===== BEM: 2 botones ===== */
+  .button { border: 2px solid blanchedalmond; padding: 10px 24px; border-radius: 6px; font-size: .9rem; cursor: pointer; }
+  .button--primary { background-color: var(--primary); color: white; border-color: var(--primary); }
+  .button--secondary { background-color: white; color: var(--primary); border-color: #ffc59b; }
+  .button:focus-visible { outline: 3px solid #4aa8ff; outline-offset: 2px; }
+
+  /* ===== font-size: px, em, rem ===== */
+  :root { font-size: 16px; }
+  .fs p { margin: 2px 0; }
+  .fs .px { font-size: 21px; }
+  .fs .em { font-size: 1.3em; }      /* 1.3 × tamaño del padre */
+  .fs .rem { font-size: 1.3rem; }    /* 1.3 × tamaño de <html> */
+  .fs--padre { font-size: 1.2em; }   /* con padre a 1.2em: 1.3em → 24.96px; 1.3rem sigue en 20.8px */
+
+  /* ===== Problema 70% / 30% con padding ===== */
+  .col { padding: 20px; float: left; box-sizing: border-box; color:#fff; }
+  .col--70 { width: 70%; background: #2563eb; }
+  .col--30 { width: 30%; background: #db2777; }
+  .clearfix::after { content: ""; display: block; clear: both; }
+  /* Sin border-box 70% + 30% + 80px de padding NO caben. Con border-box (o con calc) sí. */
+  .alt-calc { padding: 20px; float:left; width: calc(70% - 40px); background:#2563eb; color:#fff; box-sizing: content-box; }
+
+  /* ===== Margen negativo: contact card ===== */
+  .card { width: 260px; background: #c9a7d8; border-radius: 6px; overflow: hidden; text-align: center; box-shadow: 0 2px 8px #0003; }
+  .card-top { background: #9a6fb0; height: 70px; }
+  .card img { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #fff; background: #fff; margin: -40px auto 0; display: block; }
+  .card-body { padding: 10px 16px 18px; }
+  .card-body p { font-size: .8rem; }
+
+  /* ===== position: absolute (5 cajas) ===== */
+  .contenedor { position: relative; width: 300px; height: 300px; background: #7ff; border: 2px solid #55a; }
+  .contenedor div { position: absolute; width: 60px; height: 60px; background: #f5a623; border: 2px solid #55a; font-size: 12px; }
+  .Box1 { top: 0; left: 0; } .Box2 { top: 0; right: 0; }
+  .Box3 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .Box4 { bottom: 0; left: 0; } .Box5 { bottom: 0; right: 0; }
+
+  /* ===== z-index padre/hijo ===== */
+  .padre { position: relative; width: 150px; height: 150px; background: #f5a623; margin: 30px; }
+  .hijo { position: absolute; width: 60px; height: 60px; background: blue; top: -25px; left: -25px; }
+  .hijo--detras { z-index: -1; }
+  /* z-index:-1 en el hijo lo manda detrás del padre porque el padre NO crea stacking context (z-index: auto).
+     Si el padre tuviera z-index:0, el hijo quedaría dentro de su contexto y se vería por encima de su fondo. */
+
+  /* ===== overflow ===== */
+  .caja-of { position: relative; width: 150px; height: 150px; border: 2px solid blue; margin: 10px; display:inline-block; }
+  .caja-of--hidden { overflow: hidden; }
+  .caja-of svg { position: relative; top: 30px; left: 30px; display:block; }
+
+  /* ===== :active con transition ===== */
+  .act { width: 150px; height: 120px; border: 8px solid #ccc; background: #000; transition: width .5s, border-color .5s; }
+  .act:active { width: 260px; border-color: #e5e53a; }
+  .act:hover { border-color: #9ad; }
+  .act:focus-visible { outline: 3px solid #4aa8ff; }
+</style>
+</head>
+<body>
+<h1>Diseño004 – ejercicios CSS</h1>
+
+<h2>Problema 1 – especificidad (resultado en comentarios)</h2>
+<p class="rojo" id="naranja">1) hola ¿qué tal? → ROJO (!important gana a todo)</p>
+<p class="rojo"><span>2) hola ¿qué tal? → ROJO (el span hereda)</span></p>
+<p id="verde">3) hola ¿qué tal? → VERDE (id)</p>
+<p class="rosa" id="naranja">4) hola ¿qué tal? → NARANJA (id &gt; clase)</p>
+<p style="color:blue;" class="rosa">5) hola ¿qué tal? → AZUL (estilo en línea &gt; clase)</p>
+
+<h2>Problema 2 – herencia de color y borde</h2>
+<div class="p2">
+  <h1>Herencia de color y borde ESTO ES UN h1</h1>
+  <p>PÁRRAFO Lorem ipsum dolor sit amet. <span>ESTO ES UN SPAN</span> iste obcaecati qui veniam nulla <a href="#">ENLACE</a> saepe labore ut omnis voluptas?</p>
+</div>
+
+<h2>Problema 3 – ¿de qué color es cada párrafo?</h2>
+<div class="z">
+  <div id="lista">
+    <p>Párrafo 1 → azul</p>
+    <p class="mark, mark1">Párrafo 2 → azul (#lista p, 1-0-1, gana)</p>
+  </div>
+  <p class="mark1, mark">Párrafo 3 → rojo (el token "mark1," con coma no cuenta; sí .mark)</p>
+  <p class="mark1">Párrafo 4 → verde (misma especificidad: gana la última regla)</p>
+</div>
+<p><b>Con la solución</b> (sustituir <code>#lista p</code> por <code>:where(.lista) p</code>):</p>
+<div class="sol">
+  <div class="lista"><p>Párrafo 1 → azul</p><p class="mark">Párrafo 2 → rojo</p></div>
+</div>
+
+<h2>BEM – dos botones</h2>
+<button class="button button--primary">Acción primaria</button>
+<button class="button button--secondary">Acción secundaria</button>
+
+<h2>font-size: px, em, rem (práctica 7-7)</h2>
+<div class="fs">
+  <p>Párrafo 1: 16px por defecto</p>
+  <p class="px">Párrafo 2: 21px</p>
+  <p class="em">Párrafo 3: 1.3em = 1.3 × 16 = 20.8px</p>
+  <p class="rem">Párrafo 4: 1.3rem = 1.3 × 16 = 20.8px</p>
+  <div class="fs--padre">
+    <p class="em">Con padre a 1.2em: 1.3em = 1.3 × 19.2 = 24.96px</p>
+    <p class="rem">Con padre a 1.2em: 1.3rem sigue en 20.8px</p>
+  </div>
+</div>
+<p><i>Si cambiamos el font-size del elemento raíz (html) a 21px, <b>sí</b> cambian los rem: 1.3rem = 27.3px; los em dependen del padre.</i></p>
+
+<h2>Fuentes: títulos con Playfair Display y párrafos con Roboto</h2>
+<p>Este párrafo usa Roboto; el título de arriba usa Playfair Display.</p>
+
+<h2>Problema: cajas 70% / 30% con padding</h2>
+<div class="clearfix"><div class="col col--70">70% + padding 20px</div><div class="col col--30">30% + padding</div></div>
+<p>Solución: <code>box-sizing: border-box</code> (o <code>width: calc(70% - 40px)</code> con content-box).</p>
+
+<h2>Margen negativo – contact card</h2>
+<div class="card">
+  <div class="card-top"></div>
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><circle cx='40' cy='32' r='16' fill='%23b5651d'/><path d='M10 80 Q40 40 70 80Z' fill='%23334'/></svg>" alt="Avatar">
+  <div class="card-body"><h2 style="margin:6px 0">Lorem Ipsum</h2><p>Non eligendi accusantium qui fugiat ab blanditiis, impedit molitia architecto et sequi et itaque molestias.</p></div>
+</div>
+
+<h2>position: absolute – 5 cajas</h2>
+<div class="contenedor">
+  <div class="Box1">Box1</div><div class="Box2">Box2</div><div class="Box3">Box3</div><div class="Box4">Box4</div><div class="Box5">Box5</div>
+</div>
+
+<h2>z-index padre/hijo</h2>
+<div style="display:flex;gap:40px">
+  <div class="padre"><div class="hijo"></div></div>
+  <div class="padre"><div class="hijo hijo--detras"></div></div>
+</div>
+
+<h2>overflow</h2>
+<div class="caja-of"><svg width="120" height="120"><rect width="120" height="120" fill="#000"/><path d="M25 30H95L30 90H95" stroke="#39a0ff" stroke-width="10" fill="none"/></svg></div>
+<div class="caja-of caja-of--hidden"><svg width="120" height="120"><rect width="120" height="120" fill="#000"/><path d="M25 30H95L30 90H95" stroke="#39a0ff" stroke-width="10" fill="none"/></svg></div>
+
+<h2>:active con transition (mantén pulsado)</h2>
+<div class="act" tabindex="0"></div>
+</body>
+</html>

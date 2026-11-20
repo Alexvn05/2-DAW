@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Diseño005 – CSS miscelánea</title>
+<style>
+  :root { --fg:#1f2937; --bg:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#e5e7eb; --bg:#111827; } }   /* Dark mode */
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; color: var(--fg); background: var(--bg); margin: 16px; }
+  h2 { margin: 28px 0 8px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .row > div { text-align: center; font-size: 12px; }
+
+  /* ---------- object-fit / object-position ---------- */
+  .img { width: 150px; height: 220px; border: 3px solid blue; background:#fff; }
+  .none { object-fit: none; } .fill { object-fit: fill; } .contain { object-fit: contain; }
+  .cover { object-fit: cover; } .scale { object-fit: scale-down; }
+  .pos { object-fit: none; object-position: left top; }
+
+  /* ---------- cursor ---------- */
+  .c { display:inline-block; padding:6px 10px; margin:4px; background:plum; border:3px solid orange; }
+  .c1 { cursor: pointer; } .c1:active { cursor: copy; }
+  .c2 { cursor: crosshair; } .c2:active { cursor: move; }
+  .c3 { cursor: wait; } .c3:active { cursor: alias; }
+  .c4 { cursor: zoom-in; } .c4:active { cursor: no-drop; }
+  .c5 { cursor: grab; } .c5:active { cursor: help; }
+
+  /* ---------- colores ---------- */
+  .col { width: 150px; height: 90px; border: 3px solid orange; padding: 6px; color:#fff; }
+  .nombre { background-color: teal; }
+  .rgb { background-color: rgb(0, 128, 128); }
+  .hex { background-color: #008080; }
+  .amarillo { background-color: rgb(255, 255, 0); color:#000; }
+  .naranja { background-color: rgb(255, 165, 0); color:#000; }
+  .rosado { background-color: rgb(255, 192, 203); color:#000; }
+  .gris { background-color: rgb(125, 125, 125); }
+  .alpha { background: rgba(255,0,0,.5); color:#000; }
+  .hsl { background: hsl(0, 100%, 50%); }           /* = rojo puro */
+  .oklch { background: oklch(0.63 0.26 29); }        /* rojo en espacio perceptual */
+
+  /* ---------- fondo con imagen + degradado ---------- */
+  .fondo { height: 240px; color:#fff; font-size: 28px; padding: 12px;
+    background:
+      linear-gradient(135deg, rgba(255,0,0,.55), rgba(0,255,0,.45), rgba(0,0,255,.55)),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='240'><rect width='600' height='240' fill='%23d9a066'/><circle cx='430' cy='110' r='80' fill='%23f5e0b8'/></svg>");
+    background-size: cover; background-position: center; background-repeat: no-repeat; }
+  /* ---------- gradientes en texto y borde (slide 27) ---------- */
+  .dark { background:#000; padding:12px; }
+  .gt { font-size: 1.6rem; margin:0 0 10px; width: fit-content;
+        background: linear-gradient(to right, pink, blue, yellow, green);
+        -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gb { border: 10px solid transparent; border-image: linear-gradient(to right, pink, blue, yellow, green) 1;
+        text-align:center; padding: 12px; }
+  .gb h2 { margin:0; font-size:1.1rem; background: linear-gradient(to right, #66f, #cc9); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ---------- botón (actividad slide 30) ---------- */
+  .boton { padding: 14px 40px; font-size: 1.2rem; color:#fff; background:#181818; cursor:pointer;
+           border: 3px solid transparent;
+           border-image: linear-gradient(to right, #4aa8ff, red, orange, yellow, green, #4aa8ff) 1;
+           transition: transform .25s ease-in, background-color .3s linear; }
+  .boton:hover { background-color:#333; transform: scale(1.05); }
+  .boton:focus-visible { outline: 3px solid #4aa8ff; outline-offset: 3px; }   /* nunca quitar el focus */
+  .boton:active { transform: scale(.97); }
+
+  /* ---------- transition: diferencia entre funciones ---------- */
+  .pista { background:#4f5be3; padding: 8px; width: 100%; max-width: 520px; }
+  .pista div { width: 40px; height: 40px; margin: 8px 0; background: #cf4; border:1px solid #fff;
+               transition: margin-left 2s; }
+  .pista:hover div { margin-left: calc(100% - 40px); background:#e08a30; }
+  .t1 { transition-timing-function: linear !important; } .t2 { transition-timing-function: ease !important; }
+  .t3 { transition-timing-function: ease-in !important; } .t4 { transition-timing-function: ease-out !important; }
+  .t5 { transition-timing-function: ease-in-out !important; }
+  .pista small { color:#fff; }
+</style>
+</head>
+<body>
+
+<h2>object-fit / object-position</h2>
+<div class="row">
+  <!-- imagen "Z" generada inline (rectangular, vertical) -->
+  <div><img class="img none"    alt="none"       src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>none</div>
+  <div><img class="img fill"    alt="fill"       src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>fill</div>
+  <div><img class="img contain" alt="contain"    src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>contain</div>
+  <div><img class="img cover"   alt="cover"      src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>cover</div>
+  <div><img class="img scale"   alt="scale-down" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>scale-down</div>
+  <div><img class="img pos"     alt="object-position" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='300' height='200' fill='black'/><path d='M80 40H220L90 160H220' stroke='%2339a0ff' stroke-width='18' fill='none'/></svg>"><br>none + left top</div>
+</div>
+
+<h2>cursor (pasa el ratón y mantén pulsado)</h2>
+<span class="c c1">Pointer y en active copy</span><span class="c c2">crosshair y en active move</span>
+<span class="c c3">wait y en active alias</span><span class="c c4">zoom in y en active no drop</span><span class="c c5">grab y en active help</span>
+
+<h2>Colores: nombre, rgb, hex</h2>
+<div class="row">
+  <div class="col nombre">Color usando nombre teal</div>
+  <div class="col rgb">Color usando rgb(0, 128, 128)</div>
+  <div class="col hex">Color hexadecimal #008080</div>
+  <div class="col amarillo">¿Amarillo? rgb(255,255,0) · #FFFF00</div>
+  <div class="col naranja">Naranja rgb(255,165,0) · #FFA500</div>
+  <div class="col rosado">Rosado rgb(255,192,203) · #FFC0CB</div>
+  <div class="col gris">rgb(125,125,125) = gris medio · #7D7D7D</div>
+  <div class="col alpha">rgba(255,0,0,.5) · #FF000080</div>
+  <div class="col hsl">hsl(0, 100%, 50%) = rojo</div>
+  <div class="col oklch">oklch(0.63 0.26 29) ≈ rojo</div>
+</div>
+
+<h2>Fondo con imagen + degradado de colores</h2>
+<div class="fondo">Imagen de fondo con degradación (sustituye la url por tu foto de los caballos)</div>
+
+<h2>Degradación en texto y en borde</h2>
+<div class="dark">
+  <p class="gt">Prueba con colores Gradientes en un h1</p>
+  <div class="gb"><h2>Colores en un h2</h2></div>
+</div>
+
+<h2>Botón con estilo y degradado</h2>
+<div class="dark" style="text-align:center"><button class="boton">BOTON 1</button></div>
+
+<h2>transition: linear, ease, ease-in, ease-out, ease-in-out (pasa el ratón)</h2>
+<div class="pista">
+  <div class="t1"></div><small>linear</small>
+  <div class="t2"></div><small>ease</small>
+  <div class="t3"></div><small>ease-in</small>
+  <div class="t4"></div><small>ease-out</small>
+  <div class="t5"></div><small>ease-in-out</small>
+</div>
+
+</body>
+</html>
