@@ -1,0 +1,175 @@
+/*
+    EXAMEN PRÁCTICO - DISEÑO DE INTERFACES WEB
+
+    Alumno/a: Alejandro Vilches Nájera
+
+    Fecha: 20 / 11 / 2026
+    Desarrolla aquí los estilos CSS necesarios.
+*/
+*
+{
+    margin: 0px;
+}
+
+header
+{
+    background-color: antiquewhite;
+    padding: 50px;
+}
+
+.menu
+{
+    display: flex;
+}
+
+.menu__logo
+{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin-left: 100px;
+    font-size: 40px;
+}
+
+.menu__lista
+{
+    display: flex;
+    margin-top: 15px;
+    font-size: 20px;
+    margin-left: 50%;
+    
+}
+
+.menu__item
+{
+    list-style: none;
+    
+}
+
+.menu__enlace
+{
+    text-decoration: none;
+    color: black;
+    margin: 40px;
+    padding: 20px;
+}
+
+.menu__enlace:hover
+{
+    background-color: azure;
+}
+
+
+.menu__item:first-child
+{
+    border-right: black solid 2px;
+}
+
+/**/
+.contenido
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+
+.formulario,
+.galeria
+{
+    background-color: rgb(228, 228, 228);
+    margin: 10px 20px;
+    border-radius: 10px;
+    border-color: black solid 6px;
+}
+
+.formulario__titulo,
+.galeria__titulo
+{
+    background-color: rgb(192, 192, 192);
+    padding: 5px 20px;
+    border-radius: 10px 10px 0px 0px ;
+}
+
+.formulario__descripcion,
+.formulario__form,
+.galeria__descripcion
+{
+    margin: 5px 20px;
+}
+
+.formulario__grupo
+{
+    margin: 40px 0px;
+    display: flex;
+}
+
+.formulario__campo
+{
+    text-align: left;
+    padding: 5px 0px;
+    padding-right: 20%;
+    border-radius: 4px;
+    position: absolute;
+    margin-left: 18%;
+
+
+}
+
+.formulario__campo--mensaje
+{
+    padding: 5px 18.6% 5px 0px;
+}
+
+.formulario__etiqueta
+{
+    font-size: 20px;
+}
+
+.formulario__boton
+{
+    padding: 20px 30px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 80px;
+}
+
+/**/
+.galeria__contenedor
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.galeria__imagen
+{
+    margin: 5px 5px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    height: 200px;
+}
+
+.galeria__imagen--destacada
+{
+    grid-column: span 2;
+    
+
+}
+
+/**/
+
+.pie
+{
+    background-color: black;
+    padding: 40px;
+}
+
+.pie__texto
+{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
