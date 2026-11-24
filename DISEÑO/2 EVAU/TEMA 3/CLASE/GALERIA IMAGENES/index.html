@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content
+        {
+            background: lightblue;
+            padding: 20px 5px;
+        }
+        .caja
+        {
+            background: lightgray;
+            height: 150px;
+            width: 150px;
+            margin: 20px;
+            /*
+            animation-name: movimiento;
+            animation-duration: 4s;
+            position: relative;
+            animation-iteration-count: infinite; /*PARA QUE SE REPITA LA ANIMACIOON SIEMPRE
+            animation-direction: alternate; /*PARA QUE LA ANIMACION VUELVA EN REVERSA CUANDO LLEGUE A SU FIN
+            animation-fill-mode: both;
+            animation-delay: 1s;
+            animation-timing-function: cubic-bezier(0.06, 0.71, 1, 0.16);*/
+
+            display: flex;
+            /*transform: translateX(100%);*/
+            transform: rotate(-45deg); /*El div rota*/
+            transition: 1s;
+            transform: skew(30deg); 
+
+        }
+
+        p
+        {
+            margin: auto;
+        }
+
+        @keyframes movimiento {
+            0% {
+                left: 0;
+                background: lightskyblue;
+            }
+            50% {
+                background: lime;
+            }
+            100% {
+                left: 80%;
+                background: blue;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="caja">
+            <p>Alejandro</p>
+        </div>
+    </div>
+</body>
+</html>

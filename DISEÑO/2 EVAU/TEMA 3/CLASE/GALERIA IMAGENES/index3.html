@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 200px; /* Espacio para que el blur no se corte */
+            padding-left: 100px;
+            background-color: #ffffff; /* Obligatorio para que funcione el contrast */
+            filter: blur(8px) contrast(10); /* La clave de la fusión */
+        }
+
+        .caja 
+        {
+            background-color: rgb(234, 0, 255);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 12px solid blueviolet;
+            position: relative;
+            box-shadow: inset 0 0 0 14px #f038ff;
+        }
+
+        .caja1
+        {
+            animation: caja1 2.5s infinite alternate;
+        }
+
+        .caja2
+        {
+            animation: caja2 2.5s infinite alternate;
+        }
+
+        @keyframes caja1 {
+            0% { transform: translateX(-25px); }
+            100% { transform: translateX(25px); }
+        }
+
+        @keyframes caja2 {
+            0% { transform: translateX(25px); }
+            100% { transform: translateX(-25px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="caja caja1"></div>
+        <div class="caja caja2"></div>
+    </div>
+</body>
+</html>
